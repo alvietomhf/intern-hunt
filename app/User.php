@@ -5,10 +5,11 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'username', 'address', 'phone', 'schname', 'department', 'image',
     ];
 
     /**
@@ -36,4 +37,46 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function setEmail($value)
+    {
+        if ( empty($value) ) {
+            $this->attributes['email'] = NULL;
+        }
+    }
+
+    public function biography()
+    {
+        return $this->hasOne(Biography::class);
+    }
+
+    public function experience()
+    {
+        return $this->hasMany(Experience::class);
+    }
+
+    public function portfolio()
+    {
+        return $this->hasMany(Portfolio::class);
+    }
+
+    public function vapplicant()
+    {
+        return $this->hasMany(VacancyApplicant::class);
+    }
+
+    public function guidance_student()
+    {
+        return $this->hasOne(GuidanceStudent::class, 'student_id');
+    }
+
+    public function guidance_teacher()
+    {
+        return $this->hasMany(Guidance::class, 'teacher_id');
+    }
+
+    public function journals()
+    {
+        return $this->hasMany(Journal::class, 'student_id');
+    }
 }

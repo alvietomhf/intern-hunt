@@ -1,5 +1,9 @@
 @extends('layouts.auth')
 
+@section('title')
+    Halaman Login
+@endsection
+
 @section('content')
 <div class="app-content content">
     <div class="content-overlay"></div>

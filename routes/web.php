@@ -51,6 +51,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('vacancy', 'VacancyController');
     Route::resource('applicant', 'VacancyApplicantController');
     Route::get('detail/{id}/applicant', 'VacancyApplicantController@detail')->name('applicant.detail');
+    Route::get('prakerin/student/temp', 'VacancyApplicantController@index_studentTemp')->name('prakerin.index_stemp');
     Route::resource('journal', 'JournalController');
     Route::resource('internship', 'InternshipController');
     Route::resource('sfile', 'SfileController');
@@ -63,4 +64,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('prakerin/student/{id}/file/{vacancy}', 'PrakerinController@show_file')->name('prakerin.show_sfile');
     Route::get('prakerin/vacancy/{id}/file', 'PrakerinController@show_ifile')->name('prakerin.show_ifile');
     Route::post('prakerin/vacancy/{id}/end', 'PrakerinController@end')->name('prakerin.end');
+    Route::get('setting', 'HomeController@setting')->name('home.setting');
+    Route::post('setting', 'HomeController@updateSetting')->name('home.updateSetting');
+    Route::post('password', 'HomeController@updatePassword')->name('home.updatePassword');
 });

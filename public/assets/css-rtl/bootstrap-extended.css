@@ -2870,9 +2870,9 @@ body[data-col='1-column'] .header-navbar.floating-nav {
   position : absolute;
   bottom : 0;
   top : 100%;
-  background : -webkit-linear-gradient(120deg, #00ff0c, rgba(115, 103, 240, 0.5)) !important;
-  background :         linear-gradient(-30deg, #00ff0c, rgba(115, 103, 240, 0.5)) !important;
-  box-shadow : 0 0 8px 0 rgba(115, 103, 240, 0.5) !important;
+  background : -webkit-linear-gradient(120deg, #00ff0c, rgba(64, 245, 49, 0.7)) !important;
+  background :         linear-gradient(-30deg, #00ff0c, rgba(64, 245, 49, 0.7)) !important;
+  box-shadow : 0 0 8px 0 rgba(64, 245, 49, 0.7) !important;
   -webkit-transform : translateY(0px);
       -ms-transform : translateY(0px);
           transform : translateY(0px);

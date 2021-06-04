@@ -79,7 +79,7 @@ class GuidanceController extends Controller
     public function show(Guidance $guidance)
     {
         $students = GuidanceStudent::where('guidance_id', $guidance->id)->get();
-
+        // dd($students);
         return view('guidance.show', compact('guidance', 'students'));
     }
 

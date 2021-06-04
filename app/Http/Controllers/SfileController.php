@@ -27,16 +27,20 @@ class SfileController extends Controller
     public function create()
     {
         $data = auth()->user()->vapplicant;
+        $vapplicant = null;
         $bio_id = null;
         $vacancy_id = null;
         if(isset($data)){
             foreach($data as $value){
                 if($value->status == 'approved' && $value->vacancy->started_internship == 'yes'){
-                    $bio_id = VacancyApplicant::find($value->id)->biography->id;
-                    $vacancy_id = VacancyApplicant::find($value->id)->vacancy_id;
+                    $vapplicant = VacancyApplicant::find($value->id);
                 }
             }
         }
+        if(isset($vapplicant->biography_id)){
+            $bio_id = $vapplicant->biography->id;
+        }
+        $vacancy_id = $vapplicant->vacancy_id;
 
         return view('sfile.create', compact('bio_id', 'vacancy_id'));
     }

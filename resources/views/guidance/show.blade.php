@@ -2,10 +2,9 @@
 
 @section('content')
 <section id="basic-datatable">
-  <div class="row d-flex justify-content-center">
-    <div class="col-lg-12 col-md-12 col-sm-12">
-      @include('flash::message')
-      <div class="col-12">
+  <div class="row">
+        <div class="col-12">
+          @include('flash::message')
           <div class="card">
               <div class="card-header">
                   <h4 class="card-title">{{ $guidance->name ?? '' }}</h4>
@@ -50,13 +49,15 @@
                                   </td>
                                   <td>
                                     @if($vapp)
-                                    <a href="{{ route('guidance_s.journal', [$guidance->slug, $value->id, $vapp->vacancy_id]) }}" class="btn btn-success btn-sm btn-modal"><i class="fa fa-eye"></i> Jurnal</a>
+                                    <a href="{{ route('guidance_s.journal', [$guidance->slug, $value->student_id, $vapp->vacancy_id]) }}" class="btn btn-success btn-sm btn-modal"><i class="fa fa-eye"></i> Jurnal</a>
                                     @endif
                                   </td>
                                   <td>
                                     @if($vapp)
-                                    <a href="{{ route('guidance_s.sfile', [$guidance->slug, $value->id, $vapp->vacancy_id]) }}" class="btn btn-info btn-sm btn-modal"><i class="fa fa-eye"></i> Siswa</a>
-                                    <a href="{{ route('guidance_s.ifile', [$guidance->slug, $value->id, $vapp->vacancy_id]) }}" class="btn btn-info btn-sm btn-modal"><i class="fa fa-eye"></i> Industri</a>
+                                    <a href="{{ route('guidance_s.sfile', [$guidance->slug, $value->student_id, $vapp->vacancy_id]) }}" class="btn btn-info btn-sm btn-modal"><i class="fa fa-eye"></i> Siswa</a>
+                                    @if($vapp && isset($vapp->biography_id))
+                                    <a href="{{ route('guidance_s.ifile', [$guidance->slug, $value->student_id, $vapp->vacancy_id]) }}" class="btn btn-info btn-sm btn-modal"><i class="fa fa-eye"></i> Industri</a>
+                                    @endif
                                     @endif
                                   </td>
                                   <td>
@@ -70,8 +71,7 @@
                   </div>
               </div>
           </div>
-      </div>
-    </div>
+        </div>
   </div>
 </section>
 <div class="modal fade my-modal" id="xlarge" tabindex="-1" role="dialog" aria-labelledby="myModalLabel16" aria-hidden="true"></div>

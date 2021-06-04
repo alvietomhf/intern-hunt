@@ -1894,7 +1894,7 @@ fieldset:disabled a.btn {
     background-color: #00ff0c;
     border-color: #00ff0c; }
   .btn-outline-primary:focus, .btn-outline-primary.focus {
-    box-shadow: 0 0 0 0.2rem rgba(115, 103, 240, 0.5); }
+    box-shadow: 0 0 0 0.2rem rgba(64, 245, 49, 0.7); }
   .btn-outline-primary.disabled, .btn-outline-primary:disabled {
     color: #00ff0c;
     background-color: transparent; }
@@ -1905,7 +1905,7 @@ fieldset:disabled a.btn {
     border-color: #00ff0c; }
     .btn-outline-primary:not(:disabled):not(.disabled):active:focus, .btn-outline-primary:not(:disabled):not(.disabled).active:focus,
     .show > .btn-outline-primary.dropdown-toggle:focus {
-      box-shadow: 0 0 0 0.2rem rgba(115, 103, 240, 0.5); }
+      box-shadow: 0 0 0 0.2rem rgba(64, 245, 49, 0.7); }
 
 .btn-outline-secondary {
   color: #b8c2cc;
@@ -2618,10 +2618,10 @@ input[type="button"].btn-block {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4'%3e%3cpath stroke='%23fff' d='M0 2h4'/%3e%3c/svg%3e"); }
 
 .custom-checkbox .custom-control-input:disabled:checked ~ .custom-control-label::before {
-  background-color: rgba(115, 103, 240, 0.5); }
+  background-color: rgba(64, 245, 49, 0.7); }
 
 .custom-checkbox .custom-control-input:disabled:indeterminate ~ .custom-control-label::before {
-  background-color: rgba(115, 103, 240, 0.5); }
+  background-color: rgba(64, 245, 49, 0.7); }
 
 .custom-radio .custom-control-label::before {
   border-radius: 50%; }
@@ -2630,7 +2630,7 @@ input[type="button"].btn-block {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e"); }
 
 .custom-radio .custom-control-input:disabled:checked ~ .custom-control-label::before {
-  background-color: rgba(115, 103, 240, 0.5); }
+  background-color: rgba(64, 245, 49, 0.7); }
 
 .custom-switch {
   padding-left: 3.5rem; }
@@ -2654,7 +2654,7 @@ input[type="button"].btn-block {
     background-color: #fff;
     transform: translateX(2rem); }
   .custom-switch .custom-control-input:disabled:checked ~ .custom-control-label::before {
-    background-color: rgba(115, 103, 240, 0.5); }
+    background-color: rgba(64, 245, 49, 0.7); }
 
 .custom-select {
   display: inline-block;
@@ -3495,7 +3495,7 @@ input[type="button"].btn-block {
     background-color: #4839eb; }
   a.badge-primary:focus, a.badge-primary.focus {
     outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(115, 103, 240, 0.5); }
+    box-shadow: 0 0 0 0.2rem rgba(64, 245, 49, 0.7); }
 
 .badge-secondary {
   color: #2a2e30;

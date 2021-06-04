@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Internship;
+use App\Vacancy;
+use App\VacancyApplicant;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class InternshipController extends Controller
@@ -37,6 +40,26 @@ class InternshipController extends Controller
     {
         $input = $request->all();
         $input['student_id'] = auth()->user()->id;
+
+        $data_vacancy = [
+            'title' => 'Ditambakan oleh Siswa',
+            'description' => 'Default',
+            'begin_at' => Carbon::now(),
+            'end_at' => Carbon::now(),
+            'active' => 'no',
+            'started_internship' => 'yes'
+        ];
+        $vacancy = Vacancy::create($data_vacancy);
+        $vacancy->tags()->attach([0 => '5']);
+
+        $data_vapplicant = [
+            'user_id' => auth()->user()->id,
+            'vacancy_id' => $vacancy->id,
+            'note' => 'Default',
+            'status' => 'Approved',
+            'file' => 'none.pdf', 
+        ];
+        $vapplicant = VacancyApplicant::create($data_vapplicant);
 
         Internship::create($input);
 

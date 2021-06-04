@@ -37,15 +37,18 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/themes/semi-dark-layout.css') }}">
 
     <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/core/menu/menu-types/horizontal-menu.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/core/menu/menu-types/vertical-menu.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/core/colors/palette-gradient.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/pages/dashboard-analytics.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/pages/card-analytics.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/plugins/tour/tour.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/pages/users.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/pages/app-ecommerce-shop.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/pages/app-user.css') }}">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
-    {{-- <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css"> --}}
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('') }}assets/css/style.css"> --}}
     <!-- END: Custom CSS-->
     <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     @yield('css')
@@ -55,18 +58,23 @@
 
 <!-- BEGIN: Body-->
 
-<body class="horizontal-layout horizontal-menu 2-columns  navbar-floating footer-static  " data-open="hover" data-menu="horizontal-menu" data-col="2-columns">
+<body class="vertical-layout vertical-menu-modern 2-columns ecommerce-application navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 
+    <!-- BEGIN: Header-->
     @include('layouts.partials.header')
+    <!-- END: Header-->
 
+
+    <!-- BEGIN: Main Menu-->
     @include('layouts.partials.menu')
+    <!-- END: Main Menu-->
 
     <!-- BEGIN: Content-->
     <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper">
-            <div class="content-header row">
+            <div class="content-header row">@yield('content-header')
             </div>
             <div class="content-body">
                 @yield('content')
@@ -79,8 +87,8 @@
     <div class="drag-target"></div>
 
     <!-- BEGIN: Footer-->
-    <footer class="footer footer-static footer-light navbar-shadow">
-        <p class="clearfix blue-grey lighten-2 mb-0"><span class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT &copy; 2021<a class="text-bold-800 grey darken-2" href="#">Me,</a>All rights Reserved</span><span class="float-md-right d-none d-md-block">Hand-crafted & Made with<i class="feather icon-heart pink"></i></span>
+    <footer class="footer footer-static footer-light">
+        <p class="clearfix blue-grey lighten-2 mb-0"><span class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT &copy; 2021<a class="text-bold-800 grey darken-2" href="javascript:void(0)">Me,</a>All rights Reserved</span><span class="float-md-right d-none d-md-block">Hand-crafted & Made with<i class="feather icon-heart pink"></i></span>
             <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="feather icon-arrow-up"></i></button>
         </p>
     </footer>
@@ -92,7 +100,7 @@
     <!-- BEGIN Vendor JS-->
 
     <!-- BEGIN: Page Vendor JS-->
-    <script src="{{ asset('assets/vendors/js/ui/jquery.sticky.js') }}"></script>
+    <script src="{{ asset('assets/vendors/js/charts/apexcharts.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/js/extensions/tether.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/js/extensions/shepherd.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/js/tables/datatable/pdfmake.min.js') }}"></script>
@@ -117,29 +125,35 @@
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
+    <script src="{{ asset('assets/js/scripts/pages/user-profile.js') }}"></script>
+    <script src="{{ asset('assets/js/scripts/pages/dashboard-analytics.js') }}"></script>
     <script src="{{ asset('assets/js/scripts/datatables/datatable.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     {{-- <script src="{{ asset('assets/js/scripts/pickers/dateTime/pick-a-datetime.js') }}"></script> --}}
     <script src="{{ asset('assets/js/scripts/forms/select/form-select2.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/scripts/pages/app-ecommerce-shop.js') }}"></script> --}}
+    {{-- <script src="{{ asset('assets/js/scripts/pages/app-user.js') }}"></script> --}}
+    <script src="{{ asset('assets/js/scripts/navs/navs.js') }}"></script>
     <!-- END: Page JS-->
 
     <script>
-        $(".btn-modal").on("click", function(e) {
-            var t = $(this).data("container")
-            $.ajax({
-                url: $(this).data("href"),
-                dataType: "html",
-                success: function(e) {
-                    $(t).html(e).modal("show")
-                }
-            })
-        })
+      $(".btn-modal").on("click", function(e) {
+          var t = $(this).data("container")
+          $.ajax({
+              url: $(this).data("href"),
+              dataType: "html",
+              success: function(e) {
+                  $(t).html(e).modal("show")
+              }
+          })
+      })
     </script>
     <script>
-        $('div.alert').not('.alert-light').delay(5000).fadeOut(350);
+      $('div.alert').not('.alert-light').delay(5000).fadeOut(350);
     </script>
 
     @yield('js')
+
 </body>
 <!-- END: Body-->
 

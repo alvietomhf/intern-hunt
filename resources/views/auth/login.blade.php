@@ -28,7 +28,7 @@
                                         <div class="card-body pt-1">
                                             <form action="{{ route('login') }}" method="POST">
                                                 @csrf
-                                                <fieldset class="form-label-group form-group position-relative has-icon-left">
+                                                <fieldset class="form-label-group form-group position-relative input-divider-right">
                                                     <input
                                                     oninvalid="this.setCustomValidity('Mohon diisi dengan lengkap')"
                                                     oninput="this.setCustomValidity('')"
@@ -42,24 +42,24 @@
                                                     <label for="username">Username</label>
                                                 </fieldset>
 
-                                                <fieldset class="form-label-group position-relative has-icon-left">
+                                                <fieldset class="form-label-group position-relative input-divider-right">
                                                     <input
                                                     oninvalid="this.setCustomValidity('Mohon diisi dengan lengkap')"
                                                     oninput="this.setCustomValidity('')"
                                                     type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password" required autocomplete="current-password">
                                                     <div class="form-control-position">
-                                                        <i class="feather icon-lock"></i>
+                                                        <i toogle="#password_field" class="feather icon-eye toggle-password"></i>
                                                     </div>
                                                     @error('password')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                     <label for="password">Password</label>
                                                 </fieldset>
-                                                <div class="form-group d-flex justify-content-end align-items-center">
-                                                    <div class="text-left"><a href="{{ route('password.request') }}" class="card-link">Forgot Password?</a></div>
+                                                <div class="form-group d-flex justify-content-between">
+                                                    <div class="text-left"><a class="card-link">Lupa Password?</a><p class="text-dark"><small>Mohon hubungi guru pembimbing</small></p></div>
                                                 </div>
-                                                <a href="{{ route('register') }}" class="btn btn-outline-primary float-left btn-inline mb-50">Sign Up</a>
-                                                <button type="submit" class="btn btn-primary float-right btn-inline">Login</button>
+                                                <a href="{{ route('register') }}" class="btn btn-outline-primary float-left btn-inline mb-50">Daftar</a>
+                                                <button type="submit" class="btn btn-primary float-right btn-inline">Masuk</button>
                                             </form>
                                         </div>
                                     </div>
@@ -81,4 +81,15 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+<script>
+    $(document).on('click', '.toggle-password', function() {
+    $(this).toggleClass("icon-eye icon-eye-off");
+
+    var input = $("#password");
+    input.attr('type') === 'password' ? input.attr('type','text') : input.attr('type','password')
+    });
+</script>
 @endsection

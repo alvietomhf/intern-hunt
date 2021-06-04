@@ -12,11 +12,11 @@
             <div class="row">
                 <div class="col-md">
                     <div class="form-group">
-                        <label for="note">Motivation Letter</label>
+                        <label for="note">Cover Letter</label>
                         <textarea name="note" id="note" cols="30" rows="10" class="form-control" required></textarea>
                     </div>
                     <fieldset class="form-group">
-                      <label for="file">Portofolio *.pdf</label>
+                      <label for="file">Proposal *.pdf</label>
                       <input type="file" class="form-control-file" id="file" name="file" required>
                     </fieldset>
                 </div>

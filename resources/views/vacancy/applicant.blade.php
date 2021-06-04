@@ -3,92 +3,93 @@
 @section('css')
 <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 @endsection 
+@if($detail == 'lowongan')
+@section('content-header')
+<div class="content-header-left col-md-9 col-12 mb-2">
+  <div class="row breadcrumbs-top">
+      <div class="col-12">
+          <h2 class="content-header-title float-left mb-0">Lowongan</h2>
+      </div>
+  </div>
+</div>
+@endsection
+@endif
 
 @section('content')
-<section id="basic-datatable">
-  @include('flash::message')
-  <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">Lowongan</h4>
+@include('flash::message')
+@if($detail == 'lowongan')
+    <section id="wishlist" class="grid-view wishlist-items">
+        @foreach ($data as $key => $value)
+        <div class="card ecommerce-card">
+            <div class="card-content">
+                <div class="item-img text-center">
+                    <a class="button btn-modal" data-href="{{ route('vacancy.show', [$value->id]) }}" data-container=".my-modal" href="javascript:void(0)">
+                        <img src="{{ asset('uploads/images/default.png') }}" class="img-fluid" alt="img-placeholder">
+                    </a>
                 </div>
-                <div class="card-content">
-                    <div class="card-body card-dashboard">
-                        <div class="table-responsive">
-                            <table class="table zero-configuration datatable">
-                                <thead>
-                                    <tr>
-                                        <th>Tanggal</th>
-                                        <th>Industri</th>
-                                        <th>Keterangan</th>
-                                        <th>Tindakan</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($vacancy as $key => $value)
-                                    <tr>
-                                        <td>{{ \Carbon\Carbon::parse($value->begin_at)->format('d/m/Y') ?? '' }} - {{ \Carbon\Carbon::parse($value->end_at)->format('d/m/Y') ?? '' }}</td>
-                                        <td>{{ $value->biography->name ?? '' }}</td>
-                                        <td>{{ $value->title ?? '' }}</td>
-                                        <td>
-                                            <span class="btn-modal badge badge-pill badge-info" style="cursor: pointer;" data-href="{{ route('vacancy.show', [$value->id]) }}" data-container=".my-modal"><i class="feather icon-eye" title="Lihat / Lamar"> Lihat / Lamar</i></span>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                <div class="card-body">
+                    <div class="item-wrapper">
+                        <p>{{ $value->biography->name ?? '' }}</p>
+                    </div>
+                    <div class="item-name">
+                        <a class="button btn-modal" data-href="{{ route('vacancy.show', [$value->id]) }}" data-container=".my-modal" href="javascript:void(0)">
+                            {{ $value->title ?? '' }}
+                        </a>
+                    </div>
+                    <div>
+                        <p class="item-description">
+                            {{ \Carbon\Carbon::parse($value->begin_at)->format('d/m/Y') ?? '' }} - {{ \Carbon\Carbon::parse($value->end_at)->format('d/m/Y') ?? '' }}
+                        </p>
+                    </div>
+                </div>
+                <div class="item-options text-center btn-modal" data-href="{{ route('vacancy.show', [$value->id]) }}" data-container=".my-modal" >
+                    <div class="cart">
+                        <i class="feather icon-navigation-2"></i> <span >Lamar</span>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12">
-            <div class="card">
+        @endforeach
+    </section>
+@else
+    <section id="basic-datatable">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">  
                 <div class="card-header">
-                    <h4 class="card-title">Lamaran</h4>
-                </div>
-                <div class="card-content">
-                    <div class="card-body card-dashboard">
-                        <div class="table-responsive">
-                            <table class="table zero-configuration datatable">
-                                <thead>
-                                    <tr>
-                                        <th>Tanggal</th>
-                                        <th>Industri</th>
-                                        <th>Keterangan</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($data as $key => $value)
-                                    <tr>
-                                        <td>{{ date('d/m/Y', strtotime($value->created_at)) }}</td>
-                                        <td>{{ $value->biography->name ?? '' }}</td>
-                                        <td>{{ $value->vacancy->title ?? '' }}</td>
-                                        @php
-                                            $chip = $value->status == 'waiting' ? 'warning' : ($value->status == 'approved' ? 'primary' : 'danger');
-                                        @endphp
-                                        <td>
-                                            <div class="chip chip-{{ $chip }}">
-                                                <div class="chip-body">
-                                                    <div class="chip-text">{{ $value->status ?? '' }}</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                    <div class="float-left">
+                        <h1>Proposal ({{ $data->count() }})</h1>
                     </div>
+                </div>
+                <hr class="bg-primary">
+                <div class="card-body">
+                    @foreach ($data as $key => $value)
+                            <div class="d-flex justify-content-around">
+                                <div>
+                                    <h6>Terkirim {{ $value->created_at->format('F d, Y') }}</h6>
+                                    <p>{{ $value->created_at->diffForHumans(null, true).' ago' }}</p>
+                                </div>
+                                <a class="btn-modal" href="javascript:void(0)" data-href="{{ route('applicant.detail', [$value->id]) }}" data-container=".my-modal">{{ $value->vacancy->description ?? '' }}</a>
+                                <p>{{ $value->vacancy->title ?? '' }}</p>
+                                @php
+                                    $chip = $value->status == 'waiting' ? 'warning' : ($value->status == 'approved' ? 'primary' : 'danger');
+                                @endphp
+                                <div>
+                                    <div class="chip chip-{{ $chip }}">
+                                        <div class="chip-body">
+                                            <div class="chip-text">{{ $value->status ?? '' }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    @if(auth()->user()->vapplicant) <hr> @endif
+                    @endforeach
+                </div>  
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+@endif
 <div class="modal fade my-modal" id="xlarge" tabindex="-1" role="dialog" aria-labelledby="myModalLabel16" aria-hidden="true"></div>
 <div class="modal fade child-modal" id="xlarge" tabindex="-1" role="dialog" aria-labelledby="myModalLabel16" aria-hidden="true"></div>
 @endsection

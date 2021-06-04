@@ -33,7 +33,7 @@ class VacancyController extends Controller
             } else {
                 $data = VacancyApplicant::where('biography_id', auth()->user()->biography->id)->get();
                 $type = 'active';
-                $detail = 'lamaran';
+                $detail = 'proposal';
             }
         }
 
@@ -190,7 +190,7 @@ class VacancyController extends Controller
                                 
         if($isApplied) {
             if($isApplied->status == 'approved') {
-                flash('Anda sudah diterima oleh pihak industri.')->success();
+                flash('Anda sudah mendapatkan tempat prakerin.')->warning();
             } elseif($isApplied->status == 'rejected') {
                 flash('Anda sudah ditolak oleh pihak industri.')->error();
             } elseif($isApplied->status == 'canceled') {
@@ -204,7 +204,7 @@ class VacancyController extends Controller
 
         foreach($data as $value){
             if($value->status == 'approved' && $value->vacancy->started_internship == 'yes'){
-                flash('Tidak bisa melamar, Anda telah diterima di salah satu industri.')->warning();
+                flash('Anda sudah mendapatkan tempat prakerin.')->warning();
                 return redirect()->route('applicant.index');
             }
         }
@@ -222,7 +222,7 @@ class VacancyController extends Controller
 
         flash('Berhasil melamar lowongan')->success();
 
-        return redirect()->route('applicant.index');
+        return redirect()->route('applicant.index', ['detail' => 'proposal']);
     }
 
     public function action($id, $approval)

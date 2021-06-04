@@ -36,7 +36,7 @@
             </div>
           </div>
         </div>
-        @if(isset($industry))
+        @if(isset($industry) && isset($industry->biography))
         <div class="col-lg-6 col-12">
           <div class="card">
             <div class="card-header">
@@ -47,7 +47,7 @@
                 <p>{{ $industry->biography->description ?? '' }}</p>
                 <div class="mt-1">
                     <h6 class="mb-0">Nama:</h6>
-                    <p>{{ $industry->biography->user->name ?? '' }}</p>
+                    <p>{{ $industry->biography->name ?? '' }}</p>
                 </div>
                 <div class="mt-1">
                     <h6 class="mb-0">Alamat:</h6>
@@ -64,160 +64,172 @@
             </div>
           </div>
         </div>
-        @endif
-    </div>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12">
+        @else
+        <div class="col-lg-6 col-12">
             <div class="card">
               <div class="card-header">
-                  <h4 class="card-title">Perusahaan</h4>
-                  <div class="card-subtitle float-right">
-                      <a class="btn btn-primary btn-modal" href="javascript:void(0);" data-href="{{ route('internship.create') }}" data-container=".my-modal"><i class="fa fa-plus"></i></a>
+                  <h4>Profil Industri</h4>
+                  <i class="feather icon-more-horizontal cursor-pointer"></i>
+              </div>
+              <div class="card-body">
+                  <div class="mt-1">
+                      <h6 class="mb-0">Nama:</h6>
+                      <p>{{ $icustom->name ?? '' }}</p>
+                  </div>
+                  <div class="mt-1">
+                      <h6 class="mb-0">Alamat:</h6>
+                      <p>{{ $icustom->address ?? '' }}</p>
                   </div>
               </div>
-              <div class="card-content">
-                  <div class="card-body card-dashboard">
-                      <div class="table-responsive">
-                          <table class="table zero-configuration datatable">
-                              <thead>
-                                  <tr>
-                                      <th>Nama</th>
-                                      <th>Alamat</th>
-                                      <th>Aksi</th>
-                                  </tr>
-                              </thead>
-                              <tbody>
-                                  @foreach ($experience as $key => $value)
-                                  <tr>
-                                      <td>{{ $value->name ?? '' }}</td>
-                                      <td>{{ $value->address ?? '' }}</td>
-                                      <td>
-                                        <button data-href="{{ route('internship.edit', [$value->id]) }}" data-container=".my-modal" class="btn btn-warning btn-sm btn-modal"><i class="fa fa-pencil"></i></button>
-                                        <button data-href="{{ route('internship.destroy', [$value->id]) }}" class="btn btn-danger btn-sm btn-delete"><i class="fa fa-trash-o"></i></button> 
-                                      </td>
-                                  </tr>
-                                  @endforeach
-                              </tbody>
-                          </table>
-                      </div>
-                  </div>
-              </div>
+            </div>
           </div>
-        </div>
+        @endif
     </div>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">Jurnal</h4>
-                    <div class="card-subtitle float-right">
-                      <a class="btn btn-primary btn-modal" href="javascript:void(0);" data-href="{{ route('journal.create') }}" data-container=".my-modal"><i class="fa fa-plus"></i></a>
-                    </div>
-                </div>
-                <div class="card-content">
-                    <div class="card-body card-dashboard">
-                        <div class="table-responsive">
-                            <table class="table zero-configuration datatable">
-                                <thead>
-                                    <tr>
-                                        <th>Judul</th>
-                                        <th>Deskripsi</th>
-                                        <th>Tanggal</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($journal as $key => $value)
-                                    <tr>
-                                        <td>{{ $value->title ?? '' }}</td>
-                                        <td>{{ $value->description ?? '' }}</td>
-                                        <td>{{ date('d/m/Y', strtotime($value->date)) ?? '' }}</td>
-                                        <td>
-                                          <button data-href="{{ route('journal.edit', [$value->id]) }}" data-container=".my-modal" class="btn btn-warning btn-sm btn-modal"><i class="fa fa-pencil"></i> Edit</button>
-                                          <button data-href="{{ route('journal.destroy', [$value->id]) }}" class="btn btn-danger btn-sm btn-delete"><i class="fa fa-trash-o"></i> Hapus</button> 
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+</section>
+<section class="users-edit">
+    <div class="card">
+        <div class="card-content">
+            <div class="card-body">
+                <ul class="nav nav-tabs mb-3" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#account" aria-controls="account" role="tab" aria-selected="true">
+                            <span class="d-none d-sm-block">Jurnal</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" id="information-tab" data-toggle="tab" href="#information" aria-controls="information" role="tab" aria-selected="false">
+                            <span class="d-none d-sm-block">File Siswa</span>
+                        </a>
+                    </li>
+                    @if(isset($industry) && isset($industry->biography_id))
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" id="social-tab" data-toggle="tab" href="#social" aria-controls="social" role="tab" aria-selected="false">
+                            <span class="d-none d-sm-block">File Industri</span>
+                        </a>
+                    </li>
+                    @endif
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-subtitle float-left">
+                                    <h4 class="card-title">Jurnal</h4>
+                                    <p>Isi jurnal selama prakerin berjalan untuk dijadikan laporan prakerin</p>
+                                </div>
+                                <div class="card-subtitle float-right">
+                                  <a class="btn btn-primary btn-modal" href="javascript:void(0);" data-href="{{ route('journal.create') }}" data-container=".my-modal"><i class="fa fa-plus"></i></a>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body card-dashboard">
+                                    <div class="table-responsive">
+                                        <table class="table zero-configuration datatable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Judul</th>
+                                                    <th>Deskripsi</th>
+                                                    <th>Tanggal</th>
+                                                    <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($journal as $key => $value)
+                                                <tr>
+                                                    <td>{{ $value->title ?? '' }}</td>
+                                                    <td>{{ $value->description ?? '' }}</td>
+                                                    <td>{{ date('d/m/Y', strtotime($value->date)) ?? '' }}</td>
+                                                    <td>
+                                                      <button data-href="{{ route('journal.edit', [$value->id]) }}" data-container=".my-modal" class="btn btn-warning btn-sm btn-modal"><i class="fa fa-pencil"></i> Edit</button>
+                                                      <button data-href="{{ route('journal.destroy', [$value->id]) }}" class="btn btn-danger btn-sm btn-delete"><i class="fa fa-trash-o"></i> Hapus</button> 
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">File Siswa</h4>
-                    <div class="card-subtitle float-right">
-                      <a class="btn btn-primary btn-modal" href="javascript:void(0);" data-href="{{ route('sfile.create') }}" data-container=".my-modal"><i class="fa fa-plus"></i></a>
-                    </div>
-                </div>
-                <div class="card-content">
-                    <div class="card-body card-dashboard">
-                        <div class="table-responsive">
-                            <table class="table zero-configuration datatable">
-                                <thead>
-                                    <tr>
-                                        <th>Judul</th>
-                                        <th>Deskripsi</th>
-                                        <th>File</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($sfile as $key => $value)
-                                    <tr>
-                                        <td>{{ $value->title ?? '' }}</td>
-                                        <td>{{ $value->description ?? '' }}</td>
-                                        <td>
-                                          <a href="{{ asset('uploads/files/'.$value->file) ?? '' }}" target="_blank" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> Lihat</a>
-                                        </td>
-                                        <td>
-                                          <button data-href="{{ route('sfile.edit', [$value->id]) }}" data-container=".my-modal" class="btn btn-warning btn-sm btn-modal"><i class="fa fa-pencil"></i> Edit</button>
-                                          <button data-href="{{ route('sfile.destroy', [$value->id]) }}" class="btn btn-danger btn-sm btn-delete"><i class="fa fa-trash-o"></i> Hapus</button> 
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                    <div class="tab-pane" id="information" aria-labelledby="information-tab" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-subtitle float-left">
+                                    <h4 class="card-title">File Siswa</h4>
+                                    <p>Kirimkan file yang diperlukan ke industri lewat menu ini</p>
+                                </div>
+                                <div class="card-subtitle float-right">
+                                  <a class="btn btn-primary btn-modal" href="javascript:void(0);" data-href="{{ route('sfile.create') }}" data-container=".my-modal"><i class="fa fa-plus"></i></a>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body card-dashboard">
+                                    <div class="table-responsive">
+                                        <table class="table zero-configuration datatable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Judul</th>
+                                                    <th>Deskripsi</th>
+                                                    <th>File</th>
+                                                    <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($sfile as $key => $value)
+                                                <tr>
+                                                    <td>{{ $value->title ?? '' }}</td>
+                                                    <td>{{ $value->description ?? '' }}</td>
+                                                    <td>
+                                                      <a href="{{ asset('uploads/files/'.$value->file) ?? '' }}" target="_blank" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> Lihat</a>
+                                                    </td>
+                                                    <td>
+                                                      <button data-href="{{ route('sfile.edit', [$value->id]) }}" data-container=".my-modal" class="btn btn-warning btn-sm btn-modal"><i class="fa fa-pencil"></i> Edit</button>
+                                                      <button data-href="{{ route('sfile.destroy', [$value->id]) }}" class="btn btn-danger btn-sm btn-delete"><i class="fa fa-trash-o"></i> Hapus</button> 
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">File Industri</h4>
-                </div>
-                <div class="card-content">
-                    <div class="card-body card-dashboard">
-                        <div class="table-responsive">
-                            <table class="table zero-configuration datatable">
-                                <thead>
-                                    <tr>
-                                        <th>Judul</th>
-                                        <th>Deskripsi</th>
-                                        <th>Lihat</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($ifile as $key => $value)
-                                    <tr>
-                                        <td>{{ $value->title ?? '' }}</td>
-                                        <td>{{ $value->description ?? '' }}</td>
-                                        <td>
-                                          <a href="{{ asset('uploads/files/'.$value->file) ?? '' }}" target="_blank" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> Lihat</a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                    <div class="tab-pane" id="social" aria-labelledby="social-tab" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-subtitle float-left">
+                                    <h4 class="card-title">File Industri</h4>
+                                    <p>Semua file yang dikirimkan oleh industri akan ditampilkan disini</p>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body card-dashboard">
+                                    <div class="table-responsive">
+                                        <table class="table zero-configuration datatable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Judul</th>
+                                                    <th>Deskripsi</th>
+                                                    <th>Lihat</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($ifile as $key => $value)
+                                                <tr>
+                                                    <td>{{ $value->title ?? '' }}</td>
+                                                    <td>{{ $value->description ?? '' }}</td>
+                                                    <td>
+                                                      <a href="{{ asset('uploads/files/'.$value->file) ?? '' }}" target="_blank" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> Lihat</a>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

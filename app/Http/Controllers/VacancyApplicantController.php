@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Internship;
 use App\Vacancy;
 use App\VacancyApplicant;
 use Illuminate\Http\Request;
@@ -34,7 +35,7 @@ class VacancyApplicantController extends Controller
         $user_portfolio = auth()->user()->portfolio;
         $tags = [];
         $tag = [];
-
+        
         foreach($user_portfolio as $value){
             $tags[] = $value->tags; 
         }
@@ -45,17 +46,25 @@ class VacancyApplicantController extends Controller
             }
         }
 
-        $data = VacancyApplicant::where('user_id', auth()->user()->id)->get();
-        $vacancy = Vacancy::with('tags')->where([
-                                ['active', '=', 'yes'],
-                                ['started_internship', '!=', 'done']
-                            ])
-                            ->whereHas('tags', function($q) use ($tag){
-                                $q->whereIn('tag_vacancy.tag_id', $tag);
-                            })
-                            ->get();
+        if(request()->detail == 'proposal'){
+            $data = VacancyApplicant::where([
+                ['user_id', auth()->user()->id],
+                ['biography_id', '!=', 'null'],
+            ])->get();
+            $detail = 'proposal';
+        } else {
+            $data = Vacancy::with('tags')->where([
+                ['active', '=', 'yes'],
+                ['started_internship', '!=', 'done']
+            ])
+            ->whereHas('tags', function($q) use ($tag){
+                $q->whereIn('tag_vacancy.tag_id', $tag);
+            })
+            ->get();
+            $detail = 'lowongan';
+        }
 
-        return view('vacancy.applicant', compact('data', 'vacancy'));
+        return view('vacancy.applicant', compact('data', 'detail'));
     }
 
     /**
@@ -126,6 +135,30 @@ class VacancyApplicantController extends Controller
 
     public function detail($id)
     {
+        $data = VacancyApplicant::find($id);
+
+        return view('vacancy.detail', compact('data'));
+    }
+
+    public function index_studentTemp()
+    {
+        $data = auth()->user()->vapplicant;
+        $started = 'no';
+        if(isset($data)){
+            foreach($data as $value){
+                if($value->status == 'approved' && $value->vacancy->started_internship == 'yes'){
+                    $started = 'yes';
+                }
+            }
+        }
+        if($started == 'yes'){
+            return redirect()->route('prakerin.index_s');
+        }
         
+        $experience = Internship::where('student_id', auth()->user()->id)->get();
+
+        $teacher = auth()->user()->guidance_student->guidance->teacher;
+
+        return view('prakerin.index_stemp', compact('experience', 'teacher'));
     }
 }

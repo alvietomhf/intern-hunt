@@ -39,6 +39,7 @@ class PortfolioController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+        // dd($input);
 
         if ($request->hasFile('file')) {
             $input['file'] = rand().'.'.request()->file->getClientOriginalExtension();
@@ -125,7 +126,8 @@ class PortfolioController extends Controller
 
             return response()->json([
                 'status' => true,
-                'message' => 'Berhasil menghapus portofolio'
+                'message' => 'Berhasil menghapus portofolio',
+                'url' => route('profile'),
             ]);
         } catch(\Exception $e) {
             return response()->json([

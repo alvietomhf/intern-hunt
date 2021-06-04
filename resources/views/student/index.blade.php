@@ -2,10 +2,9 @@
 
 @section('content')
 <section id="basic-datatable">
-  <div class="row d-flex justify-content-center">
-    <div class="col-lg-8 col-md-12 col-sm-12">
-      @include('flash::message')
+  <div class="row">
       <div class="col-12">
+        @include('flash::message')
           <div class="card">
               <div class="card-header">
                   <h4 class="card-title">Siswa</h4>
@@ -40,7 +39,6 @@
               </div>
           </div>
       </div>
-    </div>
   </div>
 </section>
 <div class="modal fade my-modal" id="xlarge" tabindex="-1" role="dialog" aria-labelledby="myModalLabel16" aria-hidden="true"></div>

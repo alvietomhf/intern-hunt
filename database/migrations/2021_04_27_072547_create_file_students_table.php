@@ -16,7 +16,7 @@ class CreateFileStudentsTable extends Migration
         Schema::create('file_students', function (Blueprint $table) {
             $table->id();
             $table->foreignId('student_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('biography_id')->constrained('biographies')->onDelete('cascade');
+            $table->foreignId('biography_id')->nullable()->constrained('biographies')->onDelete('cascade');
             $table->foreignId('vacancy_id')->constrained('vacancies')->onDelete('cascade');
             $table->string('title');
             $table->string('description');

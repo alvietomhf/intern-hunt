@@ -4,7 +4,7 @@
 <section id="dashboard-analytics">
     @include('flash::message')  
     <div class="row d-flex justify-content-center">
-        <div class="col-lg-6 col-md-12 col-sm-12">
+        <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="card {{ $bg }} text-white">
                 <div class="card-content">
                     <div class="card-body text-center">

@@ -224,7 +224,7 @@ fieldset:disabled .fc a.fc-button,
     background-color: #00ff0c;
     border-color: #00ff0c; }
   .btn-outline-primary:focus, .fc .fc-button:focus, .btn-outline-primary.focus, .fc .focus.fc-button {
-    box-shadow: 0 0 0 0.2rem rgba(115, 103, 240, 0.5); }
+    box-shadow: 0 0 0 0.2rem rgba(64, 245, 49, 0.7); }
   .btn-outline-primary.disabled, .fc .disabled.fc-button, .btn-outline-primary:disabled, .fc .fc-button:disabled {
     color: #00ff0c;
     background-color: transparent; }
@@ -237,7 +237,7 @@ fieldset:disabled .fc a.fc-button,
     .btn-outline-primary:not(:disabled):not(.disabled):active:focus, .fc .fc-button:not(:disabled):not(.disabled):active:focus, .btn-outline-primary:not(:disabled):not(.disabled).active:focus, .fc .fc-button:not(:disabled):not(.disabled).active:focus,
     .show > .btn-outline-primary.dropdown-toggle:focus,
     .fc .show > .dropdown-toggle.fc-button:focus {
-      box-shadow: 0 0 0 0.2rem rgba(115, 103, 240, 0.5); }
+      box-shadow: 0 0 0 0.2rem rgba(64, 245, 49, 0.7); }
 
 .btn-outline-secondary {
   color: #b8c2cc;

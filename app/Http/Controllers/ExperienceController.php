@@ -25,7 +25,24 @@ class ExperienceController extends Controller
      */
     public function create()
     {
-        return view('experience.create');
+        $months = [
+            'Januari' => 'Januari',
+            'Februari' => 'Februari',
+            'Maret' => 'Maret',
+            'April' => 'April',
+            'Mei' => 'Mei',
+            'Juni' => 'Juni',
+            'Juli' => 'Juli',
+            'Agustus' => 'Agustus',
+            'September' => 'September',
+            'Oktober' => 'Oktober',
+            'November' => 'November',
+            'Desember' => 'Desember',
+        ];
+
+        $years = range(Carbon::now()->year, 1962);
+
+        return view('experience.create', compact('months', 'years'));
     }
 
     /**
@@ -38,7 +55,13 @@ class ExperienceController extends Controller
     {
         $input = $request->all();
         $input['user_id'] = auth()->user()->id;
-
+        $input['begin_at'] = $request->mstart.' '.$request->ystart;
+        $input['end_at'] = $request->mend.' '.$request->yend;
+        $now = $request->now;
+        if($now == 'now'){
+            $input['end_at'] = 'now';
+        }
+        
         Experience::create($input);
 
         flash('Berhasil menambahkan pengalaman')->success();
@@ -66,8 +89,24 @@ class ExperienceController extends Controller
     public function edit($id)
     {
         $data = Experience::find($id);
+        $months = [
+            'Januari' => 'Januari',
+            'Februari' => 'Februari',
+            'Maret' => 'Maret',
+            'April' => 'April',
+            'Mei' => 'Mei',
+            'Juni' => 'Juni',
+            'Juli' => 'Juli',
+            'Agustus' => 'Agustus',
+            'September' => 'September',
+            'Oktober' => 'Oktober',
+            'November' => 'November',
+            'Desember' => 'Desember',
+        ];
 
-        return view('experience.edit', compact('data'));
+        $years = range(Carbon::now()->year, 1962);
+
+        return view('experience.edit', compact('data', 'months', 'years'));
     }
 
     /**
@@ -81,6 +120,13 @@ class ExperienceController extends Controller
     {
         $experience = Experience::find($id);
         $input = $request->all();
+
+        $input['begin_at'] = $request->mstart.' '.$request->ystart;
+        $input['end_at'] = $request->mend.' '.$request->yend;
+        $now = $request->now;
+        if($now == 'now'){
+            $input['end_at'] = 'now';
+        }
 
         $experience->update($input);
 
@@ -103,7 +149,8 @@ class ExperienceController extends Controller
 
             return response()->json([
                 'status' => true,
-                'message' => 'Berhasil menghapus pengalaman'
+                'message' => 'Berhasil menghapus pengalaman',
+                'url' => route('profile'),
             ]);
         } catch(\Exception $e) {
             return response()->json([

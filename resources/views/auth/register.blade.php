@@ -20,7 +20,7 @@
                                 <div class="card rounded-0 mb-0 p-2">
                                     <div class="card-header pt-50 pb-1">
                                         <div class="card-title">
-                                            <h4 class="mb-0">Sign Up</h4>
+                                            <h4 class="mb-0">Daftar</h4>
                                         </div>
                                     </div>
                                     <p class="px-2">Isi form di bawah ini untuk membuat akun baru.</p>
@@ -125,7 +125,7 @@
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                     <div class="form-control-position">
-                                                        <i class="feather icon-lock"></i>
+                                                        <i toogle="#password_field" class="feather icon-eye toggle-password"></i>
                                                     </div>
                                                 </div>
                                                 <div class="form-label-group" id="form-password-confirm">
@@ -133,7 +133,7 @@
                                                     oninput="this.setCustomValidity('')" type="password" id="password_confirmation" name="password_confirmation" class="form-control" placeholder="Konfirmasi Password" required autocomplete="new-password">
                                                     <label for="password_confirmation">Confirm Password</label>
                                                     <div class="form-control-position">
-                                                        <i class="feather icon-lock"></i>
+                                                        <i toogle="#password_field" class="feather icon-eye toggle-password2"></i>
                                                     </div>
                                                 </div>
                                                 <div class="form-label-group" id="form-image">
@@ -145,8 +145,8 @@
                                                             @enderror
                                                         </div>
                                                 </div>
-                                                <a href="{{ route('login') }}" class="btn btn-outline-primary float-left btn-inline mb-50">Login</a>
-                                                <button type="submit" class="btn btn-primary float-right btn-inline mb-50">Register</a>
+                                                <a href="{{ route('login') }}" class="btn btn-outline-primary float-left btn-inline mb-50">Masuk</a>
+                                                <button type="submit" class="btn btn-primary float-right btn-inline mb-50">Daftar</a>
                                             </form>
                                         </div>
                                     </div>
@@ -209,5 +209,20 @@
             }
         })
     })
+</script>
+<script>
+    $(document).on('click', '.toggle-password', function() {
+    $(this).toggleClass("icon-eye icon-eye-off");
+
+    var input = $("#inputPassword");
+    input.attr('type') === 'password' ? input.attr('type','text') : input.attr('type','password')
+    });
+
+    $(document).on('click', '.toggle-password2', function() {
+    $(this).toggleClass("icon-eye icon-eye-off");
+
+    var input2 = $("#password_confirmation");
+    input2.attr('type') === 'password' ? input2.attr('type','text') : input2.attr('type','password')
+    });
 </script>
 @endsection

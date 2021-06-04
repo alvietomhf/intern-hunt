@@ -16,6 +16,11 @@ class PrakerinController extends Controller
     public function __construct() {
         $this->middleware(function ($request, $next) {
             if(auth()->user()->hasRole('siswa')){
+                if(!auth()->user()->guidance_student){
+                    flash('Anda belum mempunyai guru pembimbing')->error();
+                    return redirect()->route('home');
+                }
+
                 $industry = 'no';
                 $data = auth()->user()->vapplicant;
                 if(isset($data)){
@@ -25,6 +30,12 @@ class PrakerinController extends Controller
                         }
                     }
                 }
+
+                if(auth()->user()->guidance_student && $industry == 'no'){
+                    flash('Anda belum diterima di industri. Silahkan lamar atau tambahkan sendiri tempat prakerin')->error();
+                    return redirect()->route('prakerin.index_stemp');
+                }
+
                 if($industry == 'no'){
                     flash('Menu Prakerin tidak bisa dibuka, Anda belum diterima di industri / masa magang telah selesai')->error();
                     return redirect()->route('home');
@@ -37,9 +48,8 @@ class PrakerinController extends Controller
 
     public function index_student()
     {
-        $experience = Internship::where('student_id', auth()->user()->id)->get();
-
         $teacher = auth()->user()->guidance_student->guidance->teacher;
+        $icustom = null;
         $industry = null;
         $data = auth()->user()->vapplicant;
         if(isset($data)){
@@ -65,8 +75,11 @@ class PrakerinController extends Controller
             'vacancy_id' => $industry->vacancy_id,
             ])->get();
         
+        if(isset($industry) && !isset($industry->biography)){
+            $icustom = Internship::latest()->get()[0];
+        }
 
-        return view('prakerin.index_s', compact('experience', 'journal', 'teacher', 'industry', 'sfile', 'ifile'));
+        return view('prakerin.index_s', compact('journal', 'teacher', 'industry', 'sfile', 'ifile', 'icustom'));
     }
 
     public function index_industry()
@@ -77,7 +90,7 @@ class PrakerinController extends Controller
                 ])
                 ->get()
                 ->groupBy('vacancy_id');
-
+        // dd($candidates);
         return view('prakerin.index_i', compact('candidates'));
     }
 

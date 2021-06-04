@@ -85,7 +85,7 @@
     <div class="col-lg-12 col-md-12 col-sm-12">
       <div class="card">
           <div class="card-header">
-              <h4 class="card-title">Lamaran</h4>
+              <h4 class="card-title">Proposal</h4>
           </div>
           <div class="card-content">
               <div class="card-body card-dashboard">

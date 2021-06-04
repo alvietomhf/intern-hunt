@@ -6,6 +6,7 @@ use App\FileIndustry;
 use App\FileStudent;
 use App\Guidance;
 use App\GuidanceStudent;
+use App\Internship;
 use App\Journal;
 use App\User;
 use App\Vacancy;
@@ -59,7 +60,12 @@ class GuidanceStudentController extends Controller
             }
         }
 
-        return view('guidance.showids', compact('data'));
+        if($data && isset($data->biography_id)){
+            return view('guidance.showids', compact('data'));
+        } else {
+            $industry = Internship::where('student_id', GuidanceStudent::find($id)->student->id)->latest()->get()[0];
+            return view('guidance.showidscustom', compact('industry'));
+        }
     }
 
     public function studentJournal(Guidance $guidance, $id, $vacancy)

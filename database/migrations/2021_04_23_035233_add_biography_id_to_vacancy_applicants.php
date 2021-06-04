@@ -14,7 +14,7 @@ class AddBiographyIdToVacancyApplicants extends Migration
     public function up()
     {
         Schema::table('vacancy_applicants', function (Blueprint $table) {
-            $table->foreignId('biography_id')->constrained('biographies')->onDelete('cascade')->after('vacancy_id');
+            $table->foreignId('biography_id')->nullable()->constrained('biographies')->onDelete('cascade')->after('vacancy_id');
         });
     }
 

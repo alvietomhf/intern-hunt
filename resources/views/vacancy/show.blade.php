@@ -12,10 +12,12 @@
                   <img width="100rem" height="100rem" src="{{ asset('uploads/images/default.png') }}" alt="">
               </div>
               <div class="col-md-10">
-                  <h3 class="mb-2">{{ $data->title ?? '' }} | {{ $data->biography->name ?? '' }}</h3>
-                  <span class="text-small">
-                      {{ $data->description ?? '' }}
-                  </span>
+                  <h3 class="mb-2">{{ $data->title ?? '' }} | {{ $data->biography->name ? $data->biography->name : $data->biography->user->name }}</h3>
+                  <ul>
+                    @foreach (json_decode($data->description) as $key => $value)
+                    <li>{{ $value ?? '' }}</li>
+                    @endforeach
+                  </ul>
               </div>
           </div>
       </div>

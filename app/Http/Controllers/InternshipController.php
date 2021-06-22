@@ -42,6 +42,7 @@ class InternshipController extends Controller
         $input['student_id'] = auth()->user()->id;
 
         $data_vacancy = [
+            'tag_id' => '5',
             'title' => 'Ditambakan oleh Siswa',
             'description' => 'Default',
             'begin_at' => Carbon::now(),
@@ -50,14 +51,14 @@ class InternshipController extends Controller
             'started_internship' => 'yes'
         ];
         $vacancy = Vacancy::create($data_vacancy);
-        $vacancy->tags()->attach([0 => '5']);
 
         $data_vapplicant = [
             'user_id' => auth()->user()->id,
             'vacancy_id' => $vacancy->id,
             'note' => 'Default',
             'status' => 'Approved',
-            'file' => 'none.pdf', 
+            'file' => 'none.pdf',
+            'acc' => Carbon::now(),
         ];
         $vapplicant = VacancyApplicant::create($data_vapplicant);
 

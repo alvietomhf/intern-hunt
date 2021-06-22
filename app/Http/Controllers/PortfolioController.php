@@ -39,6 +39,7 @@ class PortfolioController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+        $input['tag_id'] = $request->tag;
         // dd($input);
 
         if ($request->hasFile('file')) {
@@ -46,8 +47,7 @@ class PortfolioController extends Controller
             request()->file->move(public_path('uploads/files/'), $input['file']);
         }
 
-        $portfolio = auth()->user()->portfolio()->create($input);
-        $portfolio->tags()->attach(request('tags'));
+        auth()->user()->portfolio()->create($input);
 
         flash('Berhasil menambahkan portofolio')->success();
 
@@ -90,6 +90,7 @@ class PortfolioController extends Controller
     {
         $portfolio = Portfolio::find($id);
         $input = $request->all();
+        $input['tag_id'] = $request->tag;
 
         $oldfile = $portfolio->file;
         if ($request->hasFile('file')) {
@@ -103,7 +104,6 @@ class PortfolioController extends Controller
         }
 
         $portfolio->update($input);
-        $portfolio->tags()->sync(request('tags'));
 
         flash('Berhasil mengedit portofolio')->success();
 
@@ -121,7 +121,6 @@ class PortfolioController extends Controller
         try {
             $portfolio = Portfolio::find($id);
             File::delete('uploads/files/'.$portfolio->file);
-            $portfolio->tags()->detach();
             $portfolio->delete();
 
             return response()->json([

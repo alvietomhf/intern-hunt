@@ -89,6 +89,12 @@ class ExperienceController extends Controller
     public function edit($id)
     {
         $data = Experience::find($id);
+        $emonth = null;
+        $eyear = null;
+        list($smonth, $syear) = explode(' ', $data->begin_at);
+        if($data->end_at != 'now'){
+            list($emonth, $eyear) = explode(' ', $data->end_at);
+        }
         $months = [
             'Januari' => 'Januari',
             'Februari' => 'Februari',
@@ -106,7 +112,7 @@ class ExperienceController extends Controller
 
         $years = range(Carbon::now()->year, 1962);
 
-        return view('experience.edit', compact('data', 'months', 'years'));
+        return view('experience.edit', compact('data', 'months', 'years', 'smonth', 'syear', 'emonth', 'eyear'));
     }
 
     /**

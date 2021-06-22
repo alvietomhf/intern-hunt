@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('guidance', 'GuidanceController')->parameters([
         'guidance' => 'guidance:slug'
     ]);
+    Route::get('/search/action', 'GuidanceController@action')->name('search.action');
     Route::get('guidance/{guidance:slug}/student', 'GuidanceStudentController@index')->name('guidance_s.index');
     Route::get('guidance/{guidance:slug}/student/create', 'GuidanceStudentController@create')->name('guidance_s.create');
     Route::get('guidance/{guidance:slug}/student/{id}/profile', 'GuidanceStudentController@studentProfile')->name('guidance_s.sprofile');
@@ -67,4 +68,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('setting', 'HomeController@setting')->name('home.setting');
     Route::post('setting', 'HomeController@updateSetting')->name('home.updateSetting');
     Route::post('password', 'HomeController@updatePassword')->name('home.updatePassword');
+    Route::get('setting/banner', 'HomeController@banner')->name('banner.edit');
+    Route::post('setting/banner', 'HomeController@updateBanner')->name('banner.update');
 });

@@ -24,12 +24,15 @@
             <div class="card-content">
                 <div class="item-img text-center">
                     <a class="button btn-modal" data-href="{{ route('vacancy.show', [$value->id]) }}" data-container=".my-modal" href="javascript:void(0)">
-                        <img src="{{ asset('uploads/images/default.png') }}" class="img-fluid" alt="img-placeholder">
+                        <img src="{{ asset('uploads/images/'.$value->biography->user->image) }}" class="img-fluid" alt="img-placeholder">
                     </a>
                 </div>
                 <div class="card-body">
                     <div class="item-wrapper">
                         <p>{{ $value->biography->name ?? '' }}</p>
+                    </div>
+                    <div class="row justify-content-start">
+                    <span class="d-inline ml-1 badge badge-pill badge-light">{{ App\Tag::find($value->tag_id)->name }}</span>
                     </div>
                     <div class="item-name">
                         <a class="button btn-modal" data-href="{{ route('vacancy.show', [$value->id]) }}" data-container=".my-modal" href="javascript:void(0)">
@@ -44,7 +47,7 @@
                 </div>
                 <div class="item-options text-center btn-modal" data-href="{{ route('vacancy.show', [$value->id]) }}" data-container=".my-modal" >
                     <div class="cart">
-                        <i class="feather icon-navigation-2"></i> <span >Lamar</span>
+                        <i class="feather icon-navigation-2"></i> <span >Detail</span>
                     </div>
                 </div>
             </div>
@@ -69,7 +72,7 @@
                                     <h6>Terkirim {{ $value->created_at->format('F d, Y') }}</h6>
                                     <p>{{ $value->created_at->diffForHumans(null, true).' ago' }}</p>
                                 </div>
-                                <a class="btn-modal" href="javascript:void(0)" data-href="{{ route('applicant.detail', [$value->id]) }}" data-container=".my-modal">{{ $value->vacancy->description ?? '' }}</a>
+                                <a class="btn-modal" href="javascript:void(0)" data-href="{{ route('applicant.detail', [$value->id]) }}" data-container=".my-modal">{{ json_decode($value->vacancy->description)[0] ?? '' }}</a>
                                 <p>{{ $value->vacancy->title ?? '' }}</p>
                                 @php
                                     $chip = $value->status == 'waiting' ? 'warning' : ($value->status == 'approved' ? 'primary' : 'danger');

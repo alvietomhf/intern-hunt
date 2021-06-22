@@ -16,6 +16,7 @@ class CreateVacanciesTable extends Migration
         Schema::create('vacancies', function (Blueprint $table) {
             $table->id();
             $table->foreignId('biography_id')->nullable()->constrained('biographies')->onDelete('cascade');
+            $table->foreignId('tag_id')->nullable()->constrained('tags')->onDelete('cascade');
             $table->string('title');
             $table->longText('description');
             $table->timestamp('begin_at')->nullable();

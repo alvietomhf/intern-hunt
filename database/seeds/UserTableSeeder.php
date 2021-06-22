@@ -47,9 +47,6 @@ class UserTableSeeder extends Seeder
         $industri = User::create([
             'name' => 'Industri1',
             'username' => 'industri1',
-            'address' => 'Surabaya',
-            'phone' => '082234897331',
-            'email' => 'industri@gmail.com',
             'image' => 'profile3.png',
             'password' => Hash::make('password'),
         ]);

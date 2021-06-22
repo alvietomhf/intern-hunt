@@ -1,19 +1,36 @@
 @extends('layouts.app2')
 
+@section('content-header')
+<div class="content-header-left col-md-9 col-12 mb-2">
+    <div class="row breadcrumbs-top">
+        <div class="col-12">
+                <a href="{{ route('guidance.index') }}" class="btn btn-secondary"><i class="feather icon-arrow-left"></i> Kembali</a>
+        </div>
+    </div>
+</div>
+<div class="content-header-right text-md-right col-md-3 col-12 d-md-block">
+    <div class="form-group breadcrum-right">
+        <div class="dropdown">
+            <a class="btn btn-primary btn-modal" href="{{ route('guidance_s.create', [$guidance->slug]) }}"><i class="fa fa-plus"></i> Tambah Siswa</a>
+        </div>
+    </div>
+</div>
+@endsection
+
 @section('content')
 <section id="basic-datatable">
   <div class="row">
         <div class="col-12">
           @include('flash::message')
           <div class="card">
-              <div class="card-header">
-                  <h4 class="card-title">{{ $guidance->name ?? '' }}</h4>
-                  <div class="card-subtitle float-right">
-                      <a class="btn btn-primary btn-modal" href="javascript:void(0);" data-href="{{ route('guidance_s.create', [$guidance->slug]) }}" data-container=".my-modal"><i class="fa fa-plus"></i> Tambah Siswa</a>
-                  </div>
+              <div class="card-header justify-content-center mb-2">
+                {{-- <a href="{{ route('guidance.index') }}" class="btn btn-secondary"><i class="feather icon-arrow-left"></i> Kembali</a> --}}
+                <h4 class="card-title">{{ $guidance->name ?? '' }}</h4>
+                {{-- <a class="btn btn-primary btn-modal" href="{{ route('guidance_s.create', [$guidance->slug]) }}"><i class="fa fa-plus"></i> Tambah Siswa</a> --}}
               </div>
-              <div class="card-content">
+              {{-- <div class="card-content">
                   <div class="card-body card-dashboard">
+                      
                       <div class="table-responsive">
                           <table class="table zero-configuration datatable">
                               <thead>
@@ -69,10 +86,47 @@
                           </table>
                       </div>
                   </div>
-              </div>
+              </div> --}}
           </div>
         </div>
   </div>
+</section>
+<section id="basic-examples">
+    <div class="row match-height">
+        @foreach ($students as $key => $value)
+        @php
+        $vapp = null;
+        if(isset($value->student->vapplicant)){
+            foreach($value->student->vapplicant as $applicant){
+                if($applicant->status == 'approved' && $applicant->vacancy->started_internship == 'yes'){
+                    $vapp = App\VacancyApplicant::find($applicant->id);
+                }
+            }
+        }
+        @endphp
+        <div class="col-xl-4 col-md-6 col-sm-12 profile-card-3">
+            <div class="card">
+                <div class="card-header mx-auto">
+                    <div class="avatar avatar-xl">
+                        <a href="{{ route('guidance_s.sprofile', [$guidance->slug, $value->id]) }}"><img class="img-fluid" src="{{ asset('uploads/images/'.$value->student->image) }}" alt="img placeholder"></a>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-body text-center">
+                        <a href="{{ route('guidance_s.sprofile', [$guidance->slug, $value->id]) }}"><h4>{{ $value->student->name ?? '' }}</h4></a>
+                        <p class="">{{ $value->student->schname ?? '' }} - {{ $value->student->department ?? '' }}</p>
+                        <div class="card-btns d-flex justify-content-between">
+                            @if(isset($vapp))
+                            <a href="{{ route('guidance_s.journal', [$guidance->slug, $value->student_id, $vapp->vacancy_id]) }}" class="btn btn-outline-info btn-sm">Detail</a>
+                            @endif
+                            <button data-href="{{ route('guidance_s.destroy', [$guidance->slug, $value->id]) }}" class="btn btn-outline-danger btn-sm btn-delete">Hapus</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
+      </div>
 </section>
 <div class="modal fade my-modal" id="xlarge" tabindex="-1" role="dialog" aria-labelledby="myModalLabel16" aria-hidden="true"></div>
 @endsection
@@ -90,7 +144,7 @@
       })
   })
 
-  $('.datatable').on('click', '.btn-delete', function(e){
+  $('.btn-delete').on('click', function(e){
       var btn = $(this);
       e.stopPropagation();
       Swal.fire({

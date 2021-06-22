@@ -4,11 +4,61 @@
 <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 @endsection 
 
+@if($type == 'all')
+@section('content-header')
+<div class="content-header-left col-md-9 col-12 mb-2">
+  <div class="row breadcrumbs-top">
+      <div class="col-12">
+          <h2 class="content-header-title float-left mb-0">Lowongan</h2>
+      </div>
+  </div>
+</div>
+@endsection
+@endif
+
 @section('content')
 <section id="basic-datatable">
   @include('flash::message')
   @if($type == 'all')
-  <div class="col-lg-12 col-md-12 col-sm-12">
+  <section id="wishlist" class="grid-view wishlist-items">
+    @foreach ($data as $key => $value)
+    <div class="card ecommerce-card">
+        <div class="card-content">
+            <div class="item-img text-center">
+                <a class="button btn-modal" data-href="{{ route('vacancy.show', [$value->id]) }}" data-container=".my-modal" href="javascript:void(0)">
+                    <img src="{{ asset('uploads/images/'.$value->biography->user->image) }}" class="img-fluid" alt="img-placeholder">
+                </a>
+            </div>
+            <div class="card-body">
+                <div class="item-wrapper">
+                    <p>{{ $value->biography->name ?? '' }}</p>
+                </div>
+                <div class="row justify-content-start">
+                @foreach ($value->tags as $tag)
+                <span class="d-inline ml-1 badge badge-pill badge-light">{{ $tag->name }}</span>
+                @endforeach
+                </div>
+                <div class="item-name">
+                    <a class="button btn-modal" data-href="{{ route('vacancy.show', [$value->id]) }}" data-container=".my-modal" href="javascript:void(0)">
+                        {{ $value->title ?? '' }}
+                    </a>
+                </div>
+                <div>
+                    <p class="item-description">
+                        {{ \Carbon\Carbon::parse($value->begin_at)->format('d/m/Y') ?? '' }} - {{ \Carbon\Carbon::parse($value->end_at)->format('d/m/Y') ?? '' }}
+                    </p>
+                </div>
+            </div>
+            <div class="item-options text-center btn-modal" data-href="{{ route('vacancy.show', [$value->id]) }}" data-container=".my-modal" >
+                <div class="cart">
+                    <i class="feather icon-navigation-2"></i> <span >Detail</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endforeach
+</section>
+  {{-- <div class="col-lg-12 col-md-12 col-sm-12">
     <div class="card">
         <div class="card-header">
             <h4 class="card-title">Lowongan</h4>
@@ -38,7 +88,7 @@
             </div>
         </div>
     </div>
-  </div>
+  </div> --}}
   @else
     <div class="row">
     @if($detail == 'lowongan')

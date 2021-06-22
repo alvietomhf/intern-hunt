@@ -57,9 +57,7 @@
                         <div class="d-flex justify-content-between">
                             <div>
                                 <h4 class="d-inline ml-2">{{ $value->title ?? '' }}</h4>
-                                @foreach ($value->tags as $tag)
-                                <span class="d-inline ml-1 badge badge-pill badge-light">{{ $tag->name }}</span>
-                                @endforeach
+                                <span class="d-inline ml-1 badge badge-pill badge-light">{{ App\Tag::find($value->tag_id)->name ?? '' }}</span>
                             </div>
                             <div>
                               <button data-href="{{ route('portfolio.edit', [$value->id]) }}" data-container=".my-modal" class="btn btn-modal"><i class="fa fa-pencil fa-2x"></i></button>

@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Experience;
 use App\FileIndustry;
 use App\FileStudent;
 use App\Guidance;
 use App\GuidanceStudent;
 use App\Internship;
 use App\Journal;
+use App\Portfolio;
 use App\User;
 use App\Vacancy;
 use App\VacancyApplicant;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GuidanceStudentController extends Controller
 {
@@ -23,30 +27,41 @@ class GuidanceStudentController extends Controller
     public function create(Guidance $guidance)
     {
         $data = $guidance;
-        $students = User::role('siswa')->whereDoesntHave('guidance_student')->get();
+        // $students = User::role('siswa')->whereDoesntHave('guidance_student')->get();
 
-        return view('guidance.gscreate', compact('data' ,'students'));
+        return view('guidance.gscreate', compact('data'));
     }
 
     public function store(Request $request, Guidance $guidance)
     {
-        foreach($request->students as $student){
-            GuidanceStudent::create([
-                'guidance_id' => $guidance->id,
-                'student_id' => $student,
-            ]);
+        DB::beginTransaction();
+        try {
+            foreach($request->students as $student){
+                GuidanceStudent::create([
+                    'guidance_id' => $guidance->id,
+                    'student_id' => $student,
+                ]);
+            }
+            
+            DB::commit();
+            flash('Berhasil menambahkan siswa')->success();
+    
+            return redirect()->route('guidance.show', [$guidance->slug]);
+        } catch (Exception $e) {
+            DB::rollback();
+            flash('Pilih siswa terlebih dahulu')->error();
+
+            return redirect()->route('guidance_s.create', [$guidance->slug]);
         }
-
-        flash('Berhasil menambahkan siswa')->success();
-
-        return redirect()->route('guidance.show', [$guidance->slug]);
     }
 
     public function studentProfile(Guidance $guidance, $id)
     {
         $data = GuidanceStudent::find($id);
+        $experience = Experience::where('user_id', $data->student->id)->get();
+        $portfolio = Portfolio::where('user_id', $data->student->id)->get();
 
-        return view('guidance.showstd', compact('data'));
+        return view('guidance.showstd', compact('data', 'experience', 'portfolio'));
     }
 
     public function industryProfile(Guidance $guidance, $id)
@@ -71,12 +86,27 @@ class GuidanceStudentController extends Controller
     public function studentJournal(Guidance $guidance, $id, $vacancy)
     {
         $user = User::find($id);
-        $data = Journal::where([
+        $vacanc = Vacancy::find($vacancy)->biography;
+        $industry = null;
+        if(isset($vacanc)){
+            $industry = User::find(Vacancy::find($vacancy)->biography->user->id);
+        }else {
+            $industry = Internship::where('student_id', $id)->latest()->get()[0];
+        }
+        $journal = Journal::where([
                 'student_id' => $id,
                 'vacancy_id' => $vacancy
             ])->get();
+        $sfile = FileStudent::where([
+            'student_id' => $id,
+            'vacancy_id' => $vacancy
+        ])->get();
+        $ifile = FileIndustry::where([
+            'student_id' => $id,
+            'vacancy_id' => $vacancy
+        ])->get();
 
-        return view('guidance.showjrnl', compact('user', 'data'));
+        return view('guidance.showjrnl', compact('user', 'journal', 'sfile', 'ifile', 'industry', 'vacanc'));
     }
 
     public function studentFile(Guidance $guidance, $id, $vacancy)

@@ -17,6 +17,7 @@ class CreateVacancyApplicantsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('vacancy_id')->constrained('vacancies')->onDelete('cascade');
+            $table->foreignId('biography_id')->nullable()->constrained('biographies')->onDelete('cascade');
             $table->longText('note');
             $table->enum('status', ['waiting', 'approved', 'rejected', 'canceled'])->default('waiting');
             $table->timestamps();

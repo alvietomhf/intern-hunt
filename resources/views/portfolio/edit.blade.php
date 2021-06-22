@@ -20,12 +20,15 @@
           </fieldset>
           <div class="form-group">
             <label for="tag">Tag</label>
-            <select class="select2 form-control tag-select2" name="tags[]" id="tag" multiple="multiple">
-              @foreach ($data->tags as $tag)
+            <select class="select2 form-control tag-select2" name="tag" id="tag" required>
+              {{-- @foreach ($data->tags as $tag)
                   <option selected value="{{ $tag->id }}">{{ $tag->name }}</option>
               @endforeach
               @foreach ($tags as $tag)
                   <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+              @endforeach --}}
+              @foreach ($tags as $tag)
+                  <option {{ $tag->id == $data->tag_id ? 'selected' : '' }} value="{{ $tag->id }}">{{ $tag->name }}</option>
               @endforeach
             </select>
           </div>
@@ -45,7 +48,7 @@
   $(document).ready(function() {
     $('.tag-select2').select2({
         dropdownAutoWidth: true,
-        multiple: true,
+        multiple: false,
         width: '100%',
         height: '30px',
         placeholder: "Pilih",

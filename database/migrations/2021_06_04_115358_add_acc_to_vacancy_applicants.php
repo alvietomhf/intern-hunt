@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddBiographyIdToVacancyApplicants extends Migration
+class AddAccToVacancyApplicants extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddBiographyIdToVacancyApplicants extends Migration
     public function up()
     {
         Schema::table('vacancy_applicants', function (Blueprint $table) {
-            $table->foreignId('biography_id')->nullable()->constrained('biographies')->onDelete('cascade')->after('vacancy_id');
+            $table->timestamp('acc')->nullable()->after('file');
         });
     }
 

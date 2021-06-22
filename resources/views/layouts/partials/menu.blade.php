@@ -50,13 +50,13 @@
             @role('industri')
             <li class=" nav-item"><a href="#"><i class="feather icon-file-text"></i><span class="menu-title" data-i18n="Cari Kandidat">Cari Kandidat</span></a>
                 <ul class="menu-content">
-                    <li class="{{ request()->is('vacancy') && request()->query('type') == 'all' ? 'active' : '' }}"><a href="{{ route('vacancy.index', ['type' => 'all']) }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Semua">Semua</span></a>
+                    <li class="{{ request()->is('vacancy') && request()->query('type') == 'all' ? 'active' : '' }}"><a href="{{ route('vacancy.index', ['type' => 'all']) }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Semua">Semua Lowongan</span></a>
                     </li>
-                    <li><a href="#"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Aktif">Aktif</span></a>
+                    <li><a href="#"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Aktif">Lowongan Saya</span></a>
                         <ul class="menu-content">
-                            <li class="{{ request()->is('vacancy') && request()->query('type') == 'active' && request()->query('detail') == 'lowongan' ? 'active' : '' }}"><a href="{{ route('vacancy.index', ['type' => 'active', 'detail' => 'lowongan']) }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Lowongan">Lowongan</span></a>
+                            <li class="{{ request()->is('vacancy') && request()->query('type') == 'active' && request()->query('detail') == 'lowongan' ? 'active' : '' }}"><a href="{{ route('vacancy.index', ['type' => 'active', 'detail' => 'lowongan']) }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Lowongan">Lowongan Aktif</span></a>
                             </li>
-                            <li class="{{ request()->is('vacancy') && request()->query('type') == 'active' && request()->query('detail') == 'proposal' ? 'active' : '' }}"><a href="{{ route('vacancy.index', ['type' => 'active', 'detail' => 'proposal']) }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Proposal">Proposal</span></a>
+                            <li class="{{ request()->is('vacancy') && request()->query('type') == 'active' && request()->query('detail') == 'proposal' ? 'active' : '' }}"><a href="{{ route('vacancy.index', ['type' => 'active', 'detail' => 'proposal']) }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Proposal">Proposal Masuk</span></a>
                             </li>
                         </ul>
                     </li>

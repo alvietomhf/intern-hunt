@@ -13,13 +13,16 @@
             <label for="title">Judul</label>
             <input type="text" name="title" id="title" class="form-control" required>
           </div>
-          <fieldset class="form-group">
-            <label for="description">Deskripsi</label>
-            <textarea class="form-control" id="basicTextarea" rows="5" name="description" id="description" required></textarea>
-          </fieldset>
+          <div id="description_div">
+            <label for="description">Deskripsi</label><button class="btn btn-sm" id="btn_description"><i class="fa fa-plus fa-2x"></i></button>
+            <div class="form-group">
+              <input type="text" name="description[]" class="form-control" required>
+            </div>
+          </div>
           <div class="form-group">
             <label for="tag">Tag</label>
-            <select class="select2 form-control tag-select2" name="tags[]" id="tag" multiple="multiple">
+            <select class="select2 form-control tag-select2" name="tag" id="tag" required>
+              <option disabled value="" selected hidden>Pilih</option>
               @foreach ($tags as $tag)
                   <option value="{{ $tag->id }}">{{ $tag->name }}</option>
               @endforeach
@@ -47,7 +50,7 @@
   $(document).ready(function() {
     $('.tag-select2').select2({
         dropdownAutoWidth: true,
-        multiple: true,
+        multiple: false,
         width: '100%',
         height: '30px',
         placeholder: "Pilih",
@@ -71,6 +74,30 @@
       minDate: function () {
           return $('#begin_at').val();
       }
+  });
+</script>
+<script>
+  $(document).ready(function() {
+      var max_fields = 10;
+      var wrapper = $("#description_div");
+      var add_button = $("#btn_description");
+
+      var x = 1;
+      $(add_button).click(function(e) {
+          e.preventDefault();
+          if (x < max_fields) {
+              x++;
+              $(wrapper).append('<div class="form-group d-flex justify-content-between align-items-center"><input type="text" name="description[]" class="form-control" required><a class="delete ml-2"><i class="fa fa-remove"></i></a></div>'); //add input box
+          } else {
+              alert('You Reached the limits')
+          }
+      });
+
+      $(wrapper).on("click", ".delete", function(e) {
+          e.preventDefault();
+          $(this).parent('div').remove();
+          x--;
+      })
   });
 </script>
 

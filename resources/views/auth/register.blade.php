@@ -106,7 +106,7 @@
                                                         <i class="feather icon-shield"></i>
                                                     </div>
                                                 </div>
-                                                <div class="form-label-group" id="form-email">
+                                                {{-- <div class="form-label-group" id="form-email">
                                                     <input oninvalid="this.setCustomValidity('Mohon diisi dengan lengkap')"
                                                     oninput="this.setCustomValidity('')" type="email" id="inputEmail" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" value="{{ old('email') }}" required autocomplete="email">
                                                     <label for="inputEmail">Email</label>
@@ -116,7 +116,7 @@
                                                     <div class="form-control-position">
                                                         <i class="feather icon-mail"></i>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <div class="form-label-group" id="form-password">
                                                     <input oninvalid="this.setCustomValidity('Mohon diisi dengan lengkap')"
                                                     oninput="this.setCustomValidity('')" type="password" id="inputPassword" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" required autocomplete="new-password">
@@ -175,37 +175,34 @@
     $(document).ready(function(){
         let schname = $('#form-schname')
         let department = $('#form-department')
-        let email = $('#form-email')
 
-        $('#form-schname, #form-department, #form-email').remove()
+        $('#form-schname, #form-department').remove()
 
         if($('#status').val() === 'siswa'){
-            $('#form-schname, #form-department, #form-email').remove()
+            $('#form-schname, #form-department').remove()
             schname.insertBefore('#form-password')
             department.insertBefore('#form-password')
         }
         if($('#status').val() === 'guru'){
-            $('#form-schname, #form-department, #form-email').remove()
+            $('#form-schname, #form-department').remove()
             schname.insertBefore('#form-password')
         }
         if($('#status').val() === 'industri'){
-            $('#form-schname, #form-department, #form-email').remove()
-            email.insertBefore('#form-password')
+            $('#form-phone, #form-address, #form-schname, #form-department').remove()
         }
 
         $('#status').change(function() {
             if($(this).val() === 'siswa'){
-                $('#form-schname, #form-department, #form-email').remove()
+                $('#form-schname, #form-department').remove()
                 schname.insertBefore('#form-password')
                 department.insertBefore('#form-password')
             }
             if($(this).val() === 'guru'){
-                $('#form-schname, #form-department, #form-email').remove()
+                $('#form-schname, #form-department').remove()
                 schname.insertBefore('#form-password')
             }
             if($(this).val() === 'industri'){
-                $('#form-schname, #form-department, #form-email').remove()
-                email.insertBefore('#form-password')
+                $('#form-phone, #form-address, #form-schname, #form-department').remove()
             }
         })
     })

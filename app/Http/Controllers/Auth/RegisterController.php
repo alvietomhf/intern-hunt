@@ -77,9 +77,6 @@ class RegisterController extends Controller
             return Validator::make($data, [
                 'name' => ['required', 'string', 'max:255'],
                 'username' => ['required', 'string', 'min:5', 'max:15', 'unique:users', 'alpha_dash'],
-                'address' => ['required', 'string', 'max:255'],
-                'phone' => ['required', 'string', 'min:10', 'max:15'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
                 'image' => ['required', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
             ]);
@@ -97,8 +94,6 @@ class RegisterController extends Controller
         $input = [
             'name' => $data['name'],
             'username' => $data['username'],
-            'address' => $data['address'],
-            'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
         ];
 
@@ -111,14 +106,14 @@ class RegisterController extends Controller
         if($data['status'] == 'siswa'){
             $input['schname'] = $data['schname'];
             $input['department'] = $data['department'];
+            $input['address'] = $data['address'];
+            $input['phone'] = $data['phone'];
         }
 
         if($data['status'] == 'guru'){
             $input['schname'] = $data['schname'];
-        }
-
-        if($data['status'] == 'industri'){
-            $input['email'] = $data['email'];
+            $input['address'] = $data['address'];
+            $input['phone'] = $data['phone'];
         }
 
         $user = User::create($input);

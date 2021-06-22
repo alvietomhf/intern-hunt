@@ -29,10 +29,10 @@ class HomeController extends Controller
         $message = 'Akun anda sedang dalam keadaan sangat bagus';
         $icon = 'feather icon-award';
 
-        if(auth()->user()->hasRole('industri') && !auth()->user()->biography->description && !auth()->user()->biography->image && !auth()->user()->biography->name){
-            flash('Harap lengkapi biografi terlebih dahulu')->error();
-            return redirect()->route('profile');
-        }
+        // if(auth()->user()->hasRole('industri') && !auth()->user()->biography->description && !auth()->user()->biography->image && !auth()->user()->biography->name){
+        //     flash('Harap lengkapi biografi terlebih dahulu')->error();
+        //     return redirect()->route('profile');
+        // }
 
         if(auth()->user()->hasRole('guru|siswa') && !auth()->user()->biography){
             flash('Harap lengkapi biografi terlebih dahulu')->error();
@@ -66,7 +66,16 @@ class HomeController extends Controller
 
         // dd($input);
 
-        $user->update($input);
+        if($user->hasRole('industri')){
+            $user->update(['name' => $request->name]);
+            $user->biography->update([
+                'address' => $request->address,
+                'phone' => $request->phone,
+                'email' => $request->email,
+            ]);
+        } else {
+            $user->update($input);
+        }
 
         flash('Berhasil menyimpan pengaturan')->success();
 
@@ -96,5 +105,35 @@ class HomeController extends Controller
         
         flash('Berhasil merubah password')->success();
         return redirect()->route('home.setting');
+    }
+
+    public function banner()
+    {
+        return view('setting.banner');
+    }
+
+    public function updateBanner(Request $request)
+    {
+        $user = auth()->user();
+        $input = $request->all();
+
+        $oldfile = $user->banner;
+        if ($request->hasFile('banner')) {
+            if($oldfile != null) {
+                File::delete('uploads/images/'.$oldfile);
+            }
+            $input['banner'] = rand().'.'.request()->banner->getClientOriginalExtension();
+            request()->banner->move(public_path('uploads/images'), $input['banner']);
+        } else {
+            $input['banner'] = $oldfile;
+        }
+
+        // dd($input);
+
+        $user->update($input);
+
+        flash('Berhasil merubah banner')->success();
+
+        return redirect()->route('profile');
     }
 }

@@ -20,6 +20,18 @@
             <label for="name">Nama Industri</label>
             <input type="text" name="name" id="name" class="form-control" value="{{ $data->name }}" required>
           </div>
+          <div class="form-group">
+            <label for="address">Alamat</label>
+            <input type="text" name="address" id="address" class="form-control" value="{{ $data->address }}">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" class="form-control" value="{{ $data->email }}">
+          </div>
+          <div class="form-group">
+            <label for="phone">Nomor HP</label>
+            <input type="text" name="phone" id="phone" class="form-control" value="{{ $data->phone }}">
+          </div>
           <fieldset class="form-group">
             <textarea class="form-control" id="basicTextarea" rows="3" placeholder="Deskripsi" name="description" required>{{ $data->description }}</textarea>
           </fieldset>

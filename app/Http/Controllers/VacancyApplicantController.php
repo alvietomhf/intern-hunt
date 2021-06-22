@@ -37,12 +37,11 @@ class VacancyApplicantController extends Controller
         $tag = [];
         
         foreach($user_portfolio as $value){
-            $tags[] = $value->tags; 
+            $tags[] = $value->tag_id; 
         }
         foreach($tags as $value){
-            foreach($value as $val){
-                if(!in_array($val->id, $tag))
-                $tag[] += $val->id;
+            if(!in_array($value, $tag)){
+                $tag[] += $value;
             }
         }
 
@@ -53,13 +52,11 @@ class VacancyApplicantController extends Controller
             ])->get();
             $detail = 'proposal';
         } else {
-            $data = Vacancy::with('tags')->where([
+            $data = Vacancy::where([
                 ['active', '=', 'yes'],
                 ['started_internship', '!=', 'done']
             ])
-            ->whereHas('tags', function($q) use ($tag){
-                $q->whereIn('tag_vacancy.tag_id', $tag);
-            })
+            ->whereIn('tag_id', $tag)
             ->get();
             $detail = 'lowongan';
         }

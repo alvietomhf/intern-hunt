@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddNameToBiographies extends Migration
+class AddRatingToVacancyApplicants extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddNameToBiographies extends Migration
      */
     public function up()
     {
-        Schema::table('biographies', function (Blueprint $table) {
-            $table->string('name')->after('image')->nullable();
+        Schema::table('vacancy_applicants', function (Blueprint $table) {
+            $table->string('rating')->nullable()->after('acc');
         });
     }
 
@@ -25,7 +25,7 @@ class AddNameToBiographies extends Migration
      */
     public function down()
     {
-        Schema::table('biographies', function (Blueprint $table) {
+        Schema::table('vacancy_applicants', function (Blueprint $table) {
             //
         });
     }

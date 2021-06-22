@@ -65,9 +65,14 @@ class VacancyController extends Controller
         $input['begin_at'] = Carbon::createFromFormat('m/d/Y', $request->begin_at, 'Asia/Jakarta');
         $input['end_at'] = Carbon::createFromFormat('m/d/Y', $request->end_at, 'Asia/Jakarta');
         $input['biography_id'] = auth()->user()->biography->id;
+        $input['tag_id'] = $request->tag;
 
-        $vacancy = Vacancy::create($input);
-        $vacancy->tags()->attach(request('tags'));
+        foreach ($request->description as $key => $value) {
+            $data[] = $value;
+        }
+        $input['description'] = json_encode($data);
+
+        Vacancy::create($input);
 
         flash('Berhasil menambahkan lowongan')->success();
 
@@ -115,9 +120,14 @@ class VacancyController extends Controller
 
         $input['begin_at'] = Carbon::createFromFormat('m/d/Y', $request->begin_at, 'Asia/Jakarta');
         $input['end_at'] = Carbon::createFromFormat('m/d/Y', $request->end_at, 'Asia/Jakarta');
+        $input['tag_id'] = $request->tag;
+
+        foreach ($request->description as $key => $value) {
+            $data[] = $value;
+        }
+        $input['description'] = json_encode($data);
 
         $vacancy->update($input);
-        $vacancy->tags()->sync(request('tags'));
 
         flash('Berhasil mengedit lowongan')->success();
 
@@ -135,7 +145,6 @@ class VacancyController extends Controller
         try {
             $vacancy = Vacancy::find($id);
 
-            $vacancy->tags()->detach();
             $vacancy->delete();
 
             return response()->json([
@@ -256,6 +265,10 @@ class VacancyController extends Controller
             $dataNew = VacancyApplicant::where('user_id', $vacancy_applicant->user_id)->get();
 
             if($approval == 'approved'){
+                $vacancy_applicant->update([
+                    'acc' => Carbon::now(),
+                ]);
+
                 foreach($dataNew as $value){
                     if($value->status == 'waiting'){
                         $value->update([

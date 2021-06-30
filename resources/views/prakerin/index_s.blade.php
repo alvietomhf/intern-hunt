@@ -2,12 +2,15 @@
 
 @section('css')
 <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" /> --}}
 @endsection 
 
 @section('content-header')
 <div class="col-12 mb-2">
-    <button class="btn btn-danger btn-end" data-href="#"><i class="fa fa-exclamation-circle"> Akhiri Magang</i></button>
+    @if(isset($industry) && isset($industry->biography))
+    <button class="btn btn-danger btn-end" data-href="{{ route('prakerin.end_student', [$industry->vacancy_id, $industry->id]) }}"><i class="fa fa-exclamation-circle"> Akhiri Magang</i></button>
+    @else
+    <button class="btn btn-danger btn-end" data-href="{{ route('prakerin.end_student2', [$industry->vacancy_id, $industry->id]) }}"><i class="fa fa-exclamation-circle"> Akhiri Magang</i></button>
+    @endif
 </div>
 @endsection
 
@@ -22,7 +25,10 @@
                 <i class="feather icon-more-horizontal cursor-pointer"></i>
             </div>
             <div class="card-body">
-                <p>{{ $teacher->biography->description ?? '' }}</p>
+                <a class="my-25" href="javascript: void(0);">
+                    <img src="{{ asset('uploads/images/'.$teacher->image) }}" alt="users avatar" class="users-avatar-shadow rounded" height="90" width="90">
+                </a>
+                <p class="mt-1">{{ $teacher->biography->description ?? '' }}</p>
                 <div class="mt-1">
                     <h6 class="mb-0">Nama:</h6>
                     <p>{{ $teacher->name ?? '' }}</p>
@@ -50,27 +56,33 @@
                 <i class="feather icon-more-horizontal cursor-pointer"></i>
             </div>
             <div class="card-body">
-                <p>{{ $industry->biography->description ?? '' }}</p>
+                <a class="my-25" href="javascript: void(0);">
+                    <img src="{{ asset('uploads/images/'.$industry->biography->user->image) }}" alt="users avatar" class="users-avatar-shadow rounded" height="90" width="90">
+                </a>
+                <p class="mt-1">{{ $industry->biography->description ?? '' }}</p>
                 <div class="mt-1">
                     <h6 class="mb-0">Nama:</h6>
                     <p>{{ $industry->biography->name ?? '' }}</p>
                 </div>
                 <div class="mt-1">
                     <h6 class="mb-0">Alamat:</h6>
-                    <p>{{ $industry->biography->user->address ?? '-' }}</p>
+                    <p>{{ $industry->biography->address ?? '-' }}</p>
                 </div>
                 <div class="mt-1">
                     <h6 class="mb-0">Email:</h6>
-                    <p>{{ $industry->biography->user->email ?? '-' }}</p>
+                    <p>{{ $industry->biography->email ?? '-' }}</p>
                 </div>
                 <div class="mt-1">
                     <h6 class="mb-0">Nomor HP:</h6>
-                    <p>{{ $industry->biography->user->phone ?? '-' }}</p>
+                    <p>{{ $industry->biography->phone ?? '-' }}</p>
                 </div>
             </div>
           </div>
         </div>
         @else
+        @php
+        list($name, $address) = explode('|', $industry->note);
+        @endphp
         <div class="col-lg-6 col-12">
             <div class="card">
               <div class="card-header">
@@ -80,11 +92,11 @@
               <div class="card-body">
                   <div class="mt-1">
                       <h6 class="mb-0">Nama:</h6>
-                      <p>{{ $icustom->name ?? '' }}</p>
+                      <p>{{ $name ?? '' }}</p>
                   </div>
                   <div class="mt-1">
                       <h6 class="mb-0">Alamat:</h6>
-                      <p>{{ $icustom->address ?? '' }}</p>
+                      <p>{{ $address ?? '' }}</p>
                   </div>
               </div>
             </div>
@@ -248,7 +260,6 @@
 
 @section('js')
 <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script> --}}
 <script>
   $('.datatable').on('click', '.btn-modal', function(e){
       var t = $(this).data("container")
@@ -277,6 +288,48 @@
               $.ajax({
                   url: btn.data('href'),
                   method: 'DELETE',
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  },
+                  dataType: 'json',
+                  success: function(res) {
+                      if(res.status) {
+                          Swal.fire({
+                              icon: 'success',
+                              title: 'Berhasil',
+                              text: res.message
+                          }).then((result) => {
+                              window.location.href = res.url
+                          })
+                      } else {
+                          Swal.fire({
+                              icon: 'error',
+                              title: 'Gagal',
+                              text: res.message
+                          })
+                      }
+                  }
+              })
+          }
+      })
+  });
+
+  $('.btn-end').on('click', function(e){
+      var btn = $(this);
+      e.stopPropagation();
+      Swal.fire({
+          title: 'Anda yakin?',
+          text: "Anda akan mengakhiri magang!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Ya, Akhiri!'
+      }).then((result) => {
+          if (result.value) {
+              $.ajax({
+                  url: btn.data('href'),
+                  method: 'POST',
                   headers: {
                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                   },

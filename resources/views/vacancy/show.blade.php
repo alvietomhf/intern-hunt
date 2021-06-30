@@ -30,7 +30,6 @@
 </div>
 <script>
   $('.btn-apply').on('click', function(e){
-      // e.preventDefault()
       var t = $(this).data("container")
       $.ajax({
           url: $(this).data('href'),

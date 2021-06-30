@@ -2,7 +2,6 @@
 
 @section('css')
 <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" /> --}}
 @endsection 
 
 @if(!$candidates->count())
@@ -32,10 +31,7 @@
                   <div class="card-subtitle float-right">
                     @if($vacancy->started_internship == 'yes')
                     <button class="btn btn-danger btn-end" data-href="{{ route('prakerin.end', [$vacancy->id]) }}"><i class="fa fa-exclamation-circle"> Akhiri Magang</i></button>
-                    @endif
-                    <a class="btn btn-success btn-modal" href="{{ route('prakerin.show_ifile', [$vacancy->id]) }}"><i class="fa fa-eye"> File</i></a>
-                    @if($vacancy->started_internship == 'yes')
-                    <a class="btn btn-primary btn-modal" href="javascript:void(0);" data-href="{{ route('vacancy.ifile.create', [$vacancy->id]) }}" data-container=".my-modal"><i class="fa fa-plus"> Tambah</i></a>
+                    <a class="btn btn-primary btn-modal" href="javascript:void(0);" data-href="{{ route('vacancy.ifile.create', [$vacancy->id]) }}" data-container=".my-modal"><i class="fa fa-plus"> Kirim File</i></a>
                     @endif
                   </div>
               </div>
@@ -46,27 +42,16 @@
                               <thead>
                                   <tr>
                                       <th>Nama</th>
-                                      <th>Deskripsi</th>
-                                      <th>Profil</th>
-                                      <th>Jurnal Siswa</th>
-                                      <th>File Siswa</th>
+                                      <th>Tanggal Diterima</th>
+                                      <th>Detail</th>
                                   </tr>
                               </thead>
                               <tbody>
                                 @foreach ($candidate as $key => $value)
                                 <tr>
                                     <td>{{ $value->user->name ?? '' }}</td>
-                                    <td>{{ $value->vacancy->title ?? '' }}</td>
-                                    <td>
-                                    <button data-href="{{ route('prakerin.show_s', [$value->user->id]) }}" data-container=".my-modal" class="btn btn-info btn-sm btn-modal"><i class="fa fa-eye"></i> Siswa</button>
-                                    <button data-href="{{ route('prakerin.show_t', [$value->user->guidance_student->guidance->teacher->id]) }}" data-container=".my-modal" class="btn btn-info btn-sm btn-modal"><i class="fa fa-eye"></i> Guru</button>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('prakerin.show_sjournal', [$value->user->id, $vacancy->id]) }}" class="btn btn-warning btn-sm"><i class="fa fa-eye"></i> Jurnal</a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('prakerin.show_sfile', [$value->user->id, $vacancy->id]) }}" class="btn btn-secondary btn-sm"><i class="fa fa-eye"></i> File</a>
-                                    </td>
+                                    <td>{{ \Carbon\Carbon::parse($value->acc)->format('d-m-Y') ?? '' }}</td>
+                                    <td><a href="{{ route('prakerin.detail_s', [$value->id, $vacancy->id]) }}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> Lihat</a></td>
                                 </tr>
                                 @endforeach
                               </tbody>
@@ -84,7 +69,6 @@
 
 @section('js')
 <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script> --}}
 <script>
   $('.datatable').on('click', '.btn-modal', function(e){
       var t = $(this).data("container")

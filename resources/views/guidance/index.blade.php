@@ -10,7 +10,6 @@
               <div class="card-header">
                   <h4 class="card-title">Grup Bimbingan</h4>
                   <div class="card-subtitle float-right">
-                      {{-- <a class="btn btn-primary btn-modal" href="javascript:void(0);" data-href="{{ route('guidance.create') }}" data-container=".my-modal"><i class="fa fa-plus"></i> Buat Grup</a> --}}
                       <a class="btn btn-primary btn-modal" href="{{ route('guidance.create') }}"><i class="fa fa-plus"></i> Buat Grup</a>
                   </div>
               </div>
@@ -44,8 +43,8 @@
                                 <tr>
                                   <td>{{ $loop->iteration }}</td>
                                   <td>{{ $value->name ?? '' }}</td>
-                                  <td>@if($vapp && isset($vapp->biography_id)){{ $vapp->biography->name }}@else @php $ids = App\Internship::where('student_id', $sId)->latest()->get(); if($ids->count() > 0) $industry = $ids[0] @endphp {{ $industry->name ?? '' }}@endif</td>
-                                  <td>@if(isset($vapp)){{ \Carbon\Carbon::parse($vapp->acc)->format('d F Y') }}@endif</td>
+                                  <td>@if($vapp && isset($vapp->biography_id)){{ $vapp->biography->name ? $vapp->biography->name : $vapp->biography->user->name }}@else @php if(isset($vapp->note)) (list($name, $address) = explode('|',$vapp->note)) @endphp {{ $name ?? '' }}@endif</td>
+                                  <td>@if(isset($vapp)){{ \Carbon\Carbon::parse($vapp->acc)->format('d-m-Y') }}@endif</td>
                                   <td>
                                       <a href="{{ route('guidance.show', [$value->slug]) }}" class="btn btn-info btn-sm btn-modal"><i class="fa fa-eye"></i> Daftar Siswa</a>
                                       <button data-href="{{ route('guidance.edit', [$value->slug]) }}" data-container=".my-modal" class="btn btn-warning btn-sm btn-modal"><i class="fa fa-pencil"></i> Ubah Nama</button>

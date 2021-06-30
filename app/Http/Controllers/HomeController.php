@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\VacancyApplicant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -29,17 +30,37 @@ class HomeController extends Controller
         $message = 'Akun anda sedang dalam keadaan sangat bagus';
         $icon = 'feather icon-award';
 
-        // if(auth()->user()->hasRole('industri') && !auth()->user()->biography->description && !auth()->user()->biography->image && !auth()->user()->biography->name){
-        //     flash('Harap lengkapi biografi terlebih dahulu')->error();
-        //     return redirect()->route('profile');
-        // }
+        $applicant = null;
+        $data = auth()->user()->vapplicant;
+        if(isset($data)){
+            foreach($data as $value){
+                if($value->status == 'approved' && $value->vacancy->started_internship == 'done' && !isset($value->rating)){
+                    $applicant = VacancyApplicant::find($value->id);
+                }
+            }
+        }
+
+        $applicant2 = null;
+        $not_acc = 'no';
+        if(isset($data)){
+            foreach($data as $value){
+                if($value->status == 'waiting' && !isset($value->acc) && !isset($value->vacancy->biography) && $value->vacancy->started_internship == 'yes'){
+                    $not_acc = 'yes';
+                    $applicant2 = VacancyApplicant::find($value->id);
+                }
+            }
+        }
+
+        if(auth()->user()->hasRole('siswa') && isset($applicant) && !isset($applicant->rating) && isset($applicant->biography)){
+            return redirect()->route('prakerin.show_rating', [$applicant->id, $applicant->vacancy->id]);
+        }
 
         if(auth()->user()->hasRole('guru|siswa') && !auth()->user()->biography){
             flash('Harap lengkapi biografi terlebih dahulu')->error();
             return redirect()->route('profile');
         }
 
-        return view('home', compact('bg', 'title', 'message', 'icon'));
+        return view('home', compact('bg', 'title', 'message', 'icon', 'not_acc', 'applicant2'));
     }
 
     public function setting()
@@ -63,8 +84,6 @@ class HomeController extends Controller
         } else {
             $input['image'] = $oldfile;
         }
-
-        // dd($input);
 
         if($user->hasRole('industri')){
             $user->update(['name' => $request->name]);
@@ -127,8 +146,6 @@ class HomeController extends Controller
         } else {
             $input['banner'] = $oldfile;
         }
-
-        // dd($input);
 
         $user->update($input);
 

@@ -24,69 +24,8 @@
           @include('flash::message')
           <div class="card">
               <div class="card-header justify-content-center mb-2">
-                {{-- <a href="{{ route('guidance.index') }}" class="btn btn-secondary"><i class="feather icon-arrow-left"></i> Kembali</a> --}}
                 <h4 class="card-title">{{ $guidance->name ?? '' }}</h4>
-                {{-- <a class="btn btn-primary btn-modal" href="{{ route('guidance_s.create', [$guidance->slug]) }}"><i class="fa fa-plus"></i> Tambah Siswa</a> --}}
               </div>
-              {{-- <div class="card-content">
-                  <div class="card-body card-dashboard">
-                      
-                      <div class="table-responsive">
-                          <table class="table zero-configuration datatable">
-                              <thead>
-                                  <tr>
-                                      <th>No</th>
-                                      <th>Nama</th>
-                                      <th>Profil</th>
-                                      <th>Jurnal</th>
-                                      <th>File</th>
-                                      <th>Aksi</th>
-                                  </tr>
-                              </thead>
-                              <tbody>
-                                @foreach ($students as $key => $value)
-                                <tr>
-                                  <td>{{ $loop->iteration }}</td>
-                                  <td>{{ $value->student->name ?? '' }}</td>
-                                  <td>
-                                    <button data-href="{{ route('guidance_s.sprofile', [$guidance->slug, $value->id]) }}" data-container=".my-modal" class="btn btn-info btn-sm btn-modal"><i class="fa fa-eye"></i> Siswa</button>
-                                    @php
-                                    $vapp = null;
-                                    if(isset($value->student->vapplicant)){
-                                        foreach($value->student->vapplicant as $applicant){
-                                            if($applicant->status == 'approved' && $applicant->vacancy->started_internship == 'yes'){
-                                                $vapp = App\VacancyApplicant::find($applicant->id);
-                                            }
-                                        }
-                                    }
-                                    @endphp
-                                    @if($vapp)
-                                    <button data-href="{{ route('guidance_s.iprofile', [$guidance->slug, $value->id]) }}" data-container=".my-modal" class="btn btn-info btn-sm btn-modal"><i class="fa fa-eye"></i> Industri</button>
-                                    @endif
-                                  </td>
-                                  <td>
-                                    @if($vapp)
-                                    <a href="{{ route('guidance_s.journal', [$guidance->slug, $value->student_id, $vapp->vacancy_id]) }}" class="btn btn-success btn-sm btn-modal"><i class="fa fa-eye"></i> Jurnal</a>
-                                    @endif
-                                  </td>
-                                  <td>
-                                    @if($vapp)
-                                    <a href="{{ route('guidance_s.sfile', [$guidance->slug, $value->student_id, $vapp->vacancy_id]) }}" class="btn btn-info btn-sm btn-modal"><i class="fa fa-eye"></i> Siswa</a>
-                                    @if($vapp && isset($vapp->biography_id))
-                                    <a href="{{ route('guidance_s.ifile', [$guidance->slug, $value->student_id, $vapp->vacancy_id]) }}" class="btn btn-info btn-sm btn-modal"><i class="fa fa-eye"></i> Industri</a>
-                                    @endif
-                                    @endif
-                                  </td>
-                                  <td>
-                                      <button data-href="{{ route('guidance_s.destroy', [$guidance->slug, $value->id]) }}" class="btn btn-danger btn-sm btn-delete"><i class="fa fa-trash-o"></i></button> 
-                                  </td>
-                                </tr>  
-                                @endforeach
-                              </tbody>
-                          </table>
-                      </div>
-                  </div>
-              </div> --}}
           </div>
         </div>
   </div>

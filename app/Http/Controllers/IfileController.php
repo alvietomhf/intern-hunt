@@ -49,18 +49,25 @@ class IfileController extends Controller
         $input['vacancy_id'] = $vacancy_id;
 
         if ($request->hasFile('file')) {
-            $input['file'] = rand().'.'.request()->file->getClientOriginalExtension();
-            request()->file->move(public_path('uploads/files/'), $input['file']);
+            $file = rand().'.'.request()->file->getClientOriginalExtension();
+            request()->file->move(public_path('uploads/files/'), $file);
         }
-        
+
         foreach($request->students as $student){
+            $img_name = rand().'.'.request()->file->getClientOriginalExtension();
+            copy(public_path('uploads/files/'.$file), public_path('uploads/files/'.$img_name));
+
             $input['student_id'] = $student;
+            $input['file'] = $img_name;
+
             FileIndustry::create($input);
         }
 
+        File::delete('uploads/files/'.$file);
+        
         flash('Berhasil menambahkan file')->success();
 
-        return redirect()->route('prakerin.show_ifile', [$vacancy_id]);
+        return redirect()->route('prakerin.index_i');
     }
 
     /**

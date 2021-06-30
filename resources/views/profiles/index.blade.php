@@ -76,11 +76,16 @@
   @endrole
   @role('industri')
   <section id="basic-carousel">
+    @if(!(isset($biography->email) && isset($biography->address) && isset($biography->phone) && isset($biography->image)))
+    <div class="alert alert-warning" role="alert">
+      Profil atau gambar anda belum lengkap! Tekan tombol untuk melengkapi <a type="button" class="btn btn-sm btn-modal btn-primary text-dark" data-href="{{ route('biography.edit', [$biography->id]) }}" data-container=".my-modal">Lengkapi</a>
+    </div>
+    @endif
     @include('flash::message')
     @include('profiles.partials.bio')
-    <div class="row">
+    <div class="row justify-content-center">
       @if (isset($biography->image))
-      <div class="col-12">
+      <div class="col-6">
           <div class="card">
               <div class="card-content">
                   <div class="card-body">
@@ -152,7 +157,6 @@
                               title: 'Berhasil',
                               text: res.message
                           }).then((result) => {
-                              // btn.closest('td').parent('tr').fadeOut();
                               window.location.href = res.url
                           })
                       } else {

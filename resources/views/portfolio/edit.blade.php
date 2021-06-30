@@ -21,12 +21,6 @@
           <div class="form-group">
             <label for="tag">Tag</label>
             <select class="select2 form-control tag-select2" name="tag" id="tag" required>
-              {{-- @foreach ($data->tags as $tag)
-                  <option selected value="{{ $tag->id }}">{{ $tag->name }}</option>
-              @endforeach
-              @foreach ($tags as $tag)
-                  <option value="{{ $tag->id }}">{{ $tag->name }}</option>
-              @endforeach --}}
               @foreach ($tags as $tag)
                   <option {{ $tag->id == $data->tag_id ? 'selected' : '' }} value="{{ $tag->id }}">{{ $tag->name }}</option>
               @endforeach

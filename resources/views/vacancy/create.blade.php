@@ -14,8 +14,8 @@
             <input type="text" name="title" id="title" class="form-control" required>
           </div>
           <div id="description_div">
-            <label for="description">Deskripsi</label><button class="btn btn-sm" id="btn_description"><i class="fa fa-plus fa-2x"></i></button>
-            <div class="form-group">
+            <label for="description">Kriteria Kandidat</label><button class="btn btn-sm btn-outline-primary ml-1" id="btn_description"><i class="fa fa-plus"></i> Tambah Kriteria</button>
+            <div class="form-group mt-1">
               <input type="text" name="description[]" class="form-control" required>
             </div>
           </div>

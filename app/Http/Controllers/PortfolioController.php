@@ -40,7 +40,6 @@ class PortfolioController extends Controller
     {
         $input = $request->all();
         $input['tag_id'] = $request->tag;
-        // dd($input);
 
         if ($request->hasFile('file')) {
             $input['file'] = rand().'.'.request()->file->getClientOriginalExtension();

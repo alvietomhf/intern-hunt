@@ -16,7 +16,7 @@ class StudentController extends Controller
     public function index()
     {
         $data = User::role('siswa')->get();
-        // dd($data);
+        
         return view('student.index', compact('data'));
     }
 

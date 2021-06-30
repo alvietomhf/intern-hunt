@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\GuidanceStudent;
 use App\Internship;
 use App\Vacancy;
 use App\VacancyApplicant;
@@ -27,7 +28,13 @@ class InternshipController extends Controller
      */
     public function create()
     {
-        return view('internship.create');
+        $guidance = auth()->user()->guidance_student;
+        $students = GuidanceStudent::where([
+            ['guidance_id', $guidance->id],
+            ['student_id', '!=', auth()->user()->id]
+        ])->get();
+
+        return view('internship.create', compact('students'));
     }
 
     /**
@@ -55,15 +62,32 @@ class InternshipController extends Controller
         $data_vapplicant = [
             'user_id' => auth()->user()->id,
             'vacancy_id' => $vacancy->id,
-            'note' => 'Default',
+            'note' => $request->name.'|'.$request->address,
             'status' => 'Approved',
             'file' => 'none.pdf',
             'acc' => Carbon::now(),
         ];
-        $vapplicant = VacancyApplicant::create($data_vapplicant);
 
+        VacancyApplicant::create($data_vapplicant);
         Internship::create($input);
 
+        if(isset($request->students)){
+            foreach($request->students as $student){
+                $input2 = $request->only('name', 'address');
+                $input2['student_id'] = $student;
+    
+                $data_vapplicant2 = [
+                    'user_id' => $student,
+                    'vacancy_id' => $vacancy->id,
+                    'note' => $request->name.'|'.$request->address,
+                    'status' => 'waiting',
+                    'file' => 'none.pdf',
+                ];
+    
+                Internship::create($input2);
+                VacancyApplicant::create($data_vapplicant2);
+            }
+        }
         flash('Berhasil menambahkan perusahaan')->success();
 
         return redirect()->route('prakerin.index_s');

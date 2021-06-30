@@ -10,7 +10,7 @@
     <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Sysmon</title>
+    <title>Intern Hunt</title>
     <link rel="apple-touch-icon" href="{{ asset('assets/images/ico/apple-icon-120.png') }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/ico/favicon.ico') }}">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
@@ -149,7 +149,7 @@
       })
     </script>
     <script>
-      $('div.alert').not('.alert-light').delay(5000).fadeOut(350);
+      $('div.alert').not('.alert-warning').delay(5000).fadeOut(350);
     </script>
 
     @yield('js')

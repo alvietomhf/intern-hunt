@@ -9,6 +9,7 @@ use App\Journal;
 use App\User;
 use App\Vacancy;
 use App\VacancyApplicant;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PrakerinController extends Controller
@@ -36,10 +37,6 @@ class PrakerinController extends Controller
                     return redirect()->route('prakerin.index_stemp');
                 }
 
-                if($industry == 'no'){
-                    flash('Menu Prakerin tidak bisa dibuka, Anda belum diterima di industri / masa magang telah selesai')->error();
-                    return redirect()->route('home');
-                }
                 return $next($request);
             }
             return $next($request);
@@ -49,7 +46,6 @@ class PrakerinController extends Controller
     public function index_student()
     {
         $teacher = auth()->user()->guidance_student->guidance->teacher;
-        $icustom = null;
         $industry = null;
         $data = auth()->user()->vapplicant;
         if(isset($data)){
@@ -74,12 +70,8 @@ class PrakerinController extends Controller
             'student_id' => auth()->user()->id,
             'vacancy_id' => $industry->vacancy_id,
             ])->get();
-        
-        if(isset($industry) && !isset($industry->biography)){
-            $icustom = Internship::latest()->get()[0];
-        }
 
-        return view('prakerin.index_s', compact('journal', 'teacher', 'industry', 'sfile', 'ifile', 'icustom'));
+        return view('prakerin.index_s', compact('journal', 'teacher', 'industry', 'sfile', 'ifile'));
     }
 
     public function index_industry()
@@ -90,8 +82,31 @@ class PrakerinController extends Controller
                 ])
                 ->get()
                 ->groupBy('vacancy_id');
-        // dd($candidates);
+                
         return view('prakerin.index_i', compact('candidates'));
+    }
+
+    public function detail_student($id, $vacancy_id)
+    {
+        $applicant = VacancyApplicant::find($id);
+        $vacancy = Vacancy::find($vacancy_id);
+        $student = User::find($applicant->user->id);
+        $teacher = User::find($applicant->user->guidance_student->guidance->teacher->id);
+        $journal = Journal::where([
+            'student_id' => $student->id,
+            'vacancy_id' => $vacancy->id,
+        ])->get();
+        $student_file = FileStudent::where([
+            'student_id' => $student->id,
+            'vacancy_id' => $vacancy->id,
+        ])->get();
+        $industry_file = FileIndustry::where([
+            'biography_id' => auth()->user()->biography->id,
+            'vacancy_id' => $vacancy->id,
+            'student_id' => $student->id,
+        ])->get();
+
+        return view('prakerin.detail_s', compact('applicant', 'vacancy', 'student', 'teacher', 'journal', 'student_file', 'industry_file'));
     }
 
     public function show_student($id)
@@ -148,6 +163,7 @@ class PrakerinController extends Controller
         try {
             $vacancy = Vacancy::find($id);
             $vacancy->update([
+                'active' => 'no',
                 'started_internship' => 'done',
             ]);
             
@@ -155,6 +171,51 @@ class PrakerinController extends Controller
                 'status' => true,
                 'message' => 'Berhasil mengakhiri magang',
                 'url' => route('prakerin.index_i'),
+            ]);
+        } catch(\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Gagal mengakhiri magang',
+            ]);
+        }
+    }
+
+    public function end_student($id, $applicant_id)
+    {
+        try {
+            $vacancy = Vacancy::find($id);
+            $vacancy->update([
+                'active' => 'no',
+                'started_internship' => 'done',
+                'ended_internship' => Carbon::now(),
+            ]);
+            
+            return response()->json([
+                'status' => true,
+                'message' => 'Berhasil mengakhiri magang',
+                'url' => route('prakerin.show_rating', [$applicant_id, $vacancy->id]),
+            ]);
+        } catch(\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Gagal mengakhiri magang',
+            ]);
+        }
+    }
+
+    public function end_student2($id, $applicant_id)
+    {
+        try {
+            $vacancy = Vacancy::find($id);
+            $vacancy->update([
+                'started_internship' => 'done',
+                'ended_internship' => Carbon::now(),
+            ]);
+            
+            return response()->json([
+                'status' => true,
+                'message' => 'Berhasil mengakhiri magang',
+                'url' => route('home'),
             ]);
         } catch(\Exception $e) {
             return response()->json([

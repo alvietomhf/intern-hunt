@@ -327,4 +327,62 @@ class VacancyController extends Controller
             ]);
         }
     }
+
+    public function action_custom($id, $approval)
+    {
+        try {
+            $vacancy_applicant = VacancyApplicant::find($id);
+            $data = VacancyApplicant::where('user_id', $vacancy_applicant->user_id)->get();
+
+            $isAcc = false;
+            foreach($data as $value){
+                if($value->status == 'approved' && $value->vacancy->started_internship == 'yes'){
+                    $isAcc = true;
+                }
+            }
+
+            if($isAcc){
+                return response()->json([
+                    'status' => false,
+                    'icon' => 'error',
+                    'title' => 'Gagal',
+                    'message' => 'Anda sudah diterima magang!',
+                    'url' => route('home')
+                ]);
+            }
+
+            $vacancy_applicant->update([
+                'status' => $approval,
+            ]);
+
+            $dataNew = VacancyApplicant::where('user_id', $vacancy_applicant->user_id)->get();
+
+            if($approval == 'approved'){
+                $vacancy_applicant->update([
+                    'acc' => Carbon::now(),
+                ]);
+
+                foreach($dataNew as $value){
+                    if($value->status == 'waiting'){
+                        $value->update([
+                            'status' => 'canceled',
+                        ]);
+                    }
+                }
+            }
+
+            return response()->json([
+                'status' => true,
+                'icon' => 'success',
+                'title' => 'Berhasil',
+                'message' => 'Berhasil '.$approval.' undangan',
+                'url' => route('prakerin.index_s'),
+            ]);
+        } catch(\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Gagal '.$approval.' undangan',
+            ]);
+        }
+    }
 }

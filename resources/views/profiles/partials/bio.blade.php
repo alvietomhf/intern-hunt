@@ -41,6 +41,14 @@
                       <h6>Guru di {{ auth()->user()->schname }}</h6>
                       @endif
                       <p>{{ $biography->description ?? '' }}</p>
+                      @if(auth()->user()->hasRole('industri'))
+                      <h6 class="mb-0">Email:</h6>
+                      <p>{{ $biography->email ?? '-' }}</p>
+                      <h6 class="mb-0">Alamat:</h6>
+                      <p>{{ $biography->address ?? '-' }}</p>
+                      <h6 class="mb-0">No HP:</h6>
+                      <p>{{ $biography->phone ?? '-' }}</p>
+                      @endif
                       <h6 class="mb-0">Bergabung:</h6>
                       <p>{{ auth()->user()->created_at->format('d, F Y') }}</p>
                   </div>

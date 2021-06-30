@@ -25,7 +25,7 @@
             <label for="student">Siswa</label>
             <select class="select2 form-control tag-select2" name="students[]" id="student" multiple="multiple">
               @foreach ($data as $value)
-                  <option value="{{ $value->user->id }}">{{ $value->user->name }} - {{ $value->vacancy->title }}</option>
+                  <option value="{{ $value->user->id }}">{{ $value->user->name }}</option>
               @endforeach
             </select>
           </div>

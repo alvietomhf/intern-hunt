@@ -19,33 +19,62 @@
 @include('flash::message')
 @if($detail == 'lowongan')
     <section id="wishlist" class="grid-view wishlist-items">
-        @foreach ($data as $key => $value)
+        @php
+        $data_top = $data->take(3)->values();
+        $data_bottom = $data->skip(3)->values();
+        @endphp
+        @foreach ($data_top as $key => $value)
         <div class="card ecommerce-card">
             <div class="card-content">
-                <div class="item-img text-center">
-                    <a class="button btn-modal" data-href="{{ route('vacancy.show', [$value->id]) }}" data-container=".my-modal" href="javascript:void(0)">
-                        <img src="{{ asset('uploads/images/'.$value->biography->user->image) }}" class="img-fluid" alt="img-placeholder">
-                    </a>
+                <div class="item-img">
+                    <div class="card overlay-img-card text-dark">
+                        <img src="{{ asset('uploads/images/'.$value->image) }}" class="card-img" alt="card-img-6">
+                        <div class="card-img-overlay">
+                            <div class="badge badge-pill badge-glow badge-primary">Rekomendasi</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="item-wrapper">
-                        <p>{{ $value->biography->name ?? '' }}</p>
-                    </div>
-                    <div class="row justify-content-start">
-                    <span class="d-inline ml-1 badge badge-pill badge-light">{{ App\Tag::find($value->tag_id)->name }}</span>
-                    </div>
-                    <div class="item-name">
-                        <a class="button btn-modal" data-href="{{ route('vacancy.show', [$value->id]) }}" data-container=".my-modal" href="javascript:void(0)">
-                            {{ $value->title ?? '' }}
-                        </a>
+                        {{-- <h6 class="text-dark">{{ $value->title ?? '' }} | {{ $value->ranking }}</h6> --}}
+                        <h6 class="text-dark">{{ $value->title ?? '' }}</h6>
                     </div>
                     <div>
+                        <p style="font-size:0.7rem">{{ $value->name ?? '' }}</p>
                         <p class="item-description">
                             {{ \Carbon\Carbon::parse($value->begin_at)->format('d/m/Y') ?? '' }} - {{ \Carbon\Carbon::parse($value->end_at)->format('d/m/Y') ?? '' }}
                         </p>
                     </div>
                 </div>
-                <div class="item-options text-center btn-modal" data-href="{{ route('vacancy.show', [$value->id]) }}" data-container=".my-modal" >
+                <div class="item-options text-center btn-modal pt-1" data-href="{{ route('vacancy.show', [$value->id]) }}" data-container=".my-modal" >
+                    <div class="cart">
+                        <i class="feather icon-navigation-2"></i> <span >Detail</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
+        @foreach ($data_bottom as $key => $value)
+        <div class="card ecommerce-card">
+            <div class="card-content">
+                <div class="item-img">
+                    <div class="card overlay-img-card text-dark">
+                        <img src="{{ asset('uploads/images/'.$value->image) }}" class="card-img" alt="card-img-6">
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="item-wrapper">
+                        {{-- <h6 class="text-dark">{{ $value->title ?? '' }} | {{ $value->ranking }}</h6> --}}
+                        <h6 class="text-dark">{{ $value->title ?? '' }}</h6>
+                    </div>
+                    <div>
+                        <p style="font-size:0.7rem">{{ $value->name ?? '' }}</p>
+                        <p class="item-description">
+                            {{ \Carbon\Carbon::parse($value->begin_at)->format('d/m/Y') ?? '' }} - {{ \Carbon\Carbon::parse($value->end_at)->format('d/m/Y') ?? '' }}
+                        </p>
+                    </div>
+                </div>
+                <div class="item-options text-center btn-modal pt-1" data-href="{{ route('vacancy.show', [$value->id]) }}" data-container=".my-modal" >
                     <div class="cart">
                         <i class="feather icon-navigation-2"></i> <span >Detail</span>
                     </div>
@@ -69,11 +98,15 @@
                     @foreach ($data as $key => $value)
                             <div class="d-flex justify-content-around">
                                 <div>
-                                    <h6>Terkirim {{ $value->created_at->format('F d, Y') }}</h6>
-                                    <p>{{ $value->created_at->diffForHumans(null, true).' ago' }}</p>
+                                    <a class="my-25" href="javascript: void(0);">
+                                        <img src="{{ asset('uploads/images/'.$value->vacancy->biography->user->image) }}" alt="users avatar" class="users-avatar-shadow rounded" height="90" width="90">
+                                    </a>
                                 </div>
-                                <a class="btn-modal" href="javascript:void(0)" data-href="{{ route('applicant.detail', [$value->id]) }}" data-container=".my-modal">{{ json_decode($value->vacancy->description)[0] ?? '' }}</a>
-                                <p>{{ $value->vacancy->title ?? '' }}</p>
+                                <div>
+                                    <h6>{{ $value->vacancy->title ?? '' }}</h6>
+                                    <p>{{ $value->vacancy->biography->name ? $value->vacancy->biography->name : $value->vacancy->biography->user->name }}</p>
+                                </div>
+                                <p>Terkirim {{ $value->created_at->format('d-m-Y') }}</p>
                                 @php
                                     $chip = $value->status == 'waiting' ? 'warning' : ($value->status == 'approved' ? 'primary' : 'danger');
                                 @endphp
@@ -84,6 +117,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <a class="btn-modal" href="javascript:void(0)" data-href="{{ route('applicant.detail', [$value->id]) }}" data-container=".my-modal">Detail</a>
                             </div>
                     @if(auth()->user()->vapplicant) <hr> @endif
                     @endforeach

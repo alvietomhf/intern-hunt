@@ -24,32 +24,23 @@
     @foreach ($data as $key => $value)
     <div class="card ecommerce-card">
         <div class="card-content">
-            <div class="item-img text-center">
-                <a class="button btn-modal" data-href="{{ route('vacancy.show', [$value->id]) }}" data-container=".my-modal" href="javascript:void(0)">
-                    <img src="{{ asset('uploads/images/'.$value->biography->user->image) }}" class="img-fluid" alt="img-placeholder">
-                </a>
+            <div class="item-img">
+                <div class="card overlay-img-card text-dark">
+                    <img src="{{ asset('uploads/images/'.$value->biography->user->image) }}" class="card-img" alt="card-img-6">
+                </div>
             </div>
             <div class="card-body">
                 <div class="item-wrapper">
-                    <p>{{ $value->biography->name ?? '' }}</p>
-                </div>
-                <div class="row justify-content-start">
-                @foreach ($value->tags as $tag)
-                <span class="d-inline ml-1 badge badge-pill badge-light">{{ $tag->name }}</span>
-                @endforeach
-                </div>
-                <div class="item-name">
-                    <a class="button btn-modal" data-href="{{ route('vacancy.show', [$value->id]) }}" data-container=".my-modal" href="javascript:void(0)">
-                        {{ $value->title ?? '' }}
-                    </a>
+                    <h6 class="text-dark">{{ $value->title ?? '' }}</h6>
                 </div>
                 <div>
+                    <p style="font-size:0.7rem">{{ $value->biography->name ?? '' }}</p>
                     <p class="item-description">
                         {{ \Carbon\Carbon::parse($value->begin_at)->format('d/m/Y') ?? '' }} - {{ \Carbon\Carbon::parse($value->end_at)->format('d/m/Y') ?? '' }}
                     </p>
                 </div>
             </div>
-            <div class="item-options text-center btn-modal" data-href="{{ route('vacancy.show', [$value->id]) }}" data-container=".my-modal" >
+            <div class="item-options text-center btn-modal pt-1" data-href="{{ route('vacancy.show', [$value->id]) }}" data-container=".my-modal" >
                 <div class="cart">
                     <i class="feather icon-navigation-2"></i> <span >Detail</span>
                 </div>
@@ -58,37 +49,6 @@
     </div>
     @endforeach
 </section>
-  {{-- <div class="col-lg-12 col-md-12 col-sm-12">
-    <div class="card">
-        <div class="card-header">
-            <h4 class="card-title">Lowongan</h4>
-        </div>
-        <div class="card-content">
-            <div class="card-body card-dashboard">
-                <div class="table-responsive">
-                    <table class="table zero-configuration datatable">
-                        <thead>
-                            <tr>
-                              <th>Judul</th>
-                              <th>Industri</th>
-                              <th>Tanggal</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                          @foreach ($data as $key => $value)
-                          <tr>
-                              <td>{{ $value->title ?? '' }}</td>
-                              <td>{{ $value->biography->name ?? '' }}</td>
-                              <td>{{ \Carbon\Carbon::parse($value->begin_at)->format('d/m/Y') ?? '' }} - {{ \Carbon\Carbon::parse($value->end_at)->format('d/m/Y') ?? '' }}</td>
-                          </tr>
-                          @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-  </div> --}}
   @else
     <div class="row">
     @if($detail == 'lowongan')
@@ -117,10 +77,10 @@
                                 <td>{{ $value->title ?? '' }}</td>
                                 <td>{{ \Carbon\Carbon::parse($value->begin_at)->format('d/m/Y') ?? '' }} - {{ \Carbon\Carbon::parse($value->end_at)->format('d/m/Y') ?? '' }}</td>
                                 <td>
-                                  <button data-href="{{ route('vacancy.status', [$value->id]) }}" data-status="{{ $value->active == 'yes' ? 'menonaktifkan' : 'mengaktifkan' }}" class="btn btn-secondary btn-sm btn-status"><i class="fa fa-{{ $value->active == 'yes' ? 'unlock' : 'lock' }}"></i></button>
-                                  <button data-href="{{ route('vacancy.show', [$value->id]) }}" data-container=".my-modal" class="btn btn-info btn-sm btn-modal"><i class="fa fa-eye"></i></button>
-                                  <button data-href="{{ route('vacancy.edit', [$value->id]) }}" data-container=".my-modal" class="btn btn-warning btn-sm btn-modal"><i class="fa fa-pencil"></i></button>
-                                  <button data-href="{{ route('vacancy.destroy', [$value->id]) }}" class="btn btn-danger btn-sm btn-delete"><i class="fa fa-trash-o"></i></button> 
+                                  <button data-href="{{ route('vacancy.status', [$value->id]) }}" data-status="{{ $value->active == 'yes' ? 'menonaktifkan' : 'mengaktifkan' }}" class="btn btn-secondary btn-sm btn-status"><i class="fa fa-{{ $value->active == 'yes' ? 'unlock' : 'lock' }}"></i> {{ $value->active == 'yes' ? ' Nonaktifkan' : ' Aktifkan' }}</button>
+                                  <button data-href="{{ route('vacancy.show', [$value->id]) }}" data-container=".my-modal" class="btn btn-info btn-sm btn-modal"><i class="fa fa-eye"></i> Lihat</button>
+                                  <button data-href="{{ route('vacancy.edit', [$value->id]) }}" data-container=".my-modal" class="btn btn-warning btn-sm btn-modal"><i class="fa fa-pencil"></i> Edit</button>
+                                  <button data-href="{{ route('vacancy.destroy', [$value->id]) }}" class="btn btn-danger btn-sm btn-delete"><i class="fa fa-trash-o"></i> Hapus</button> 
                                 </td>
                             </tr>
                             @endforeach
@@ -143,25 +103,19 @@
                       <table class="table zero-configuration datatable">
                           <thead>
                               <tr>
+                                <th>Judul</th>
                                 <th>Tanggal</th>
                                 <th>Pelamar</th>
-                                <th>Data</th>
-                                <th>Industri</th>
-                                <th>Keterangan</th>
-                                <th>Tindakan</th>
+                                <th>Status</th>
+                                <th>Detail</th>
                               </tr>
                           </thead>
                           <tbody>
                             @foreach ($data as $key => $value)
                             <tr>
-                              <td>{{ date('d/m/Y', strtotime($value->created_at)) }}</td>
-                              <td>{{ $value->user->name ?? '' }}</td>
-                              <td>
-                                <button data-href="{{ route('prakerin.show_s', [$value->user->id]) }}" data-container=".my-modal" class="btn btn-warning btn-sm btn-modal"><i class="fa fa-eye"></i> Profil</button>
-                                <a target="_blank" href="{{ asset('uploads/files/'.$value->file ) }}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> Proposal</a>
-                              </td>
-                              <td>{{ $value->biography->name ?? '' }}</td>
                               <td>{{ $value->vacancy->title ?? '' }}</td>
+                              <td>{{ date('d-m-Y', strtotime($value->created_at)) }}</td>
+                              <td>{{ $value->user->name ?? '' }}</td>
                               <td>
                                   @if($value->status == 'waiting')
                                   <span class="btn-action badge badge-pill badge-success" style="cursor: pointer;" data-status="menerima" data-href="{{ route('vacancy.action', [$value->id, 'approved']) }}"><i class="feather icon-check" title="Terima"> Terima</i></span>
@@ -169,6 +123,10 @@
                                   @else
                                   <span class="badge badge-pill badge-{{ $value->status != 'approved' ? 'danger' : 'primary'}}" style="cursor: pointer;"><i class="feather icon-circle-o">{{ $value->status }}</i></span>
                                   @endif
+                              </td>
+                              <td>
+                                <button data-href="{{ route('prakerin.show_s', [$value->user->id]) }}" data-container=".my-modal" class="btn btn-warning btn-sm btn-modal"><i class="fa fa-eye"></i> Profil</button>
+                                <a target="_blank" href="{{ asset('uploads/files/'.$value->file ) }}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> Proposal</a>
                               </td>
                             </tr>
                             @endforeach

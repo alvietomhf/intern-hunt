@@ -56,5 +56,41 @@ class UserTableSeeder extends Seeder
             'user_id' => $industri->id
         ]);
 
+        // $industri2 = User::create([
+        //     'name' => 'Industri2',
+        //     'username' => 'industri2',
+        //     'image' => 'profile4.png',
+        //     'password' => Hash::make('password'),
+        // ]);
+
+        // $industri2->assignRole('industri');
+        // Biography::create([
+        //     'user_id' => $industri2->id
+        // ]);
+
+        // $industri3 = User::create([
+        //     'name' => 'Industri3',
+        //     'username' => 'industri3',
+        //     'image' => 'profile4.png',
+        //     'password' => Hash::make('password'),
+        // ]);
+
+        // $industri3->assignRole('industri');
+        // Biography::create([
+        //     'user_id' => $industri3->id
+        // ]);
+
+        // $industri4 = User::create([
+        //     'name' => 'Industri4',
+        //     'username' => 'industri4',
+        //     'image' => 'profile4.png',
+        //     'password' => Hash::make('password'),
+        // ]);
+
+        // $industri4->assignRole('industri');
+        // Biography::create([
+        //     'user_id' => $industri4->id
+        // ]);
+
     }
 }

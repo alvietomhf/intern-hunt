@@ -106,17 +106,6 @@
                                                         <i class="feather icon-shield"></i>
                                                     </div>
                                                 </div>
-                                                {{-- <div class="form-label-group" id="form-email">
-                                                    <input oninvalid="this.setCustomValidity('Mohon diisi dengan lengkap')"
-                                                    oninput="this.setCustomValidity('')" type="email" id="inputEmail" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" value="{{ old('email') }}" required autocomplete="email">
-                                                    <label for="inputEmail">Email</label>
-                                                    @error('email')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
-                                                    <div class="form-control-position">
-                                                        <i class="feather icon-mail"></i>
-                                                    </div>
-                                                </div> --}}
                                                 <div class="form-label-group" id="form-password">
                                                     <input oninvalid="this.setCustomValidity('Mohon diisi dengan lengkap')"
                                                     oninput="this.setCustomValidity('')" type="password" id="inputPassword" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" required autocomplete="new-password">
@@ -137,13 +126,13 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-label-group" id="form-image">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input @error('image') is-invalid @enderror" id="inputGroupFile01" name="image" required>
-                                                            <label class="custom-file-label" for="inputGroupFile01">Pilih Foto</label>
-                                                            @error('image')
-                                                                <div class="invalid-feedback">{{ $message }}</div>
-                                                            @enderror
-                                                        </div>
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input @error('image') is-invalid @enderror" id="inputGroupFile01" name="image" required>
+                                                        <label class="custom-file-label" for="inputGroupFile01">Pilih Foto</label>
+                                                        @error('image')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
                                                 </div>
                                                 <a href="{{ route('login') }}" class="btn btn-outline-primary float-left btn-inline mb-50">Masuk</a>
                                                 <button type="submit" class="btn btn-primary float-right btn-inline mb-50">Daftar</a>

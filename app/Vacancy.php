@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Vacancy extends Model
 {
-    protected $fillable = ['biography_id', 'tag_id', 'title', 'description', 'begin_at', 'end_at', 'active', 'started_internship'];
+    protected $fillable = ['biography_id', 'tag_id', 'title', 'description', 'begin_at', 'end_at', 'active', 'started_internship', 'ended_internship'];
 
     public function biography()
     {

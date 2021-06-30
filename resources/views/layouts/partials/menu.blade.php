@@ -3,13 +3,14 @@
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item mr-auto"><a class="navbar-brand" href="{{ route('home') }}">
                     <div class="brand-logo"></div>
-                    <h2 class="brand-text mb-0" style="font-size: 14px">SYSMON</h2>
+                    <h2 class="brand-text mb-0" style="font-size: 14px">INTERN HUNT</h2>
                 </a>
             </li>
         </ul>
     </div>
     <div class="shadow-bottom"></div>
     <div class="main-menu-content">
+        @role('guru|siswa')
         <div class="company" style="padding:0.5em 15px;background:#f9f9f9;">
             <div class="col-md-12">
                 <div class="d-flex justify-content-center mt-1 mb-0">
@@ -22,6 +23,7 @@
                 </div>
             </div>
         </div>
+        @endrole
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             <li class=" nav-item {{ request()->is('home') ? ' active' : '' }}"><a href="{{ route('home') }}"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a>
             </li>

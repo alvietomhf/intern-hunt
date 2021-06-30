@@ -1,11 +1,9 @@
 @extends('layouts.app2')
 
 @section('content')
-    <!-- account setting page start -->
     @include('flash::message')
     <section id="page-account-settings">
         <div class="row">
-            <!-- left menu section -->
             <div class="col-md-3 mb-2 mb-md-0">
                 <ul class="nav nav-pills flex-column mt-md-0 mt-1">
                     <li class="nav-item">
@@ -22,7 +20,7 @@
                     </li>
                 </ul>
             </div>
-            <!-- right content section -->
+
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-content">
@@ -31,27 +29,14 @@
                                 <div role="tabpanel" class="tab-pane active" id="account-vertical-general" aria-labelledby="account-pill-general" aria-expanded="true">
                                     <form action="{{ route('home.updateSetting') }}" method="post" enctype="multipart/form-data">
                                     @csrf
-                                        {{-- <div class="media">
-                                            <a href="javascript: void(0);">
-                                                <img src="{{ asset('uploads/images/'.$data->image) }}" class="rounded mr-75" alt="profile image" height="64" width="64">
-                                            </a>
-                                            <div class="media-body mt-75">
-                                                <div class="col-12 px-0 d-flex flex-sm-row flex-column justify-content-start">
-                                                    <input type="file" name="image" id="account-upload">
-                                                </div>
-                                                <p class="text-muted ml-75 mt-50"><small>Allowed JPG, JPEG or PNG. Max
-                                                        size of
-                                                        800kB</small></p>
-                                            </div>
-                                        </div> --}}
                                         <div class="media">
                                             <a href="javascript: void(0);">
-                                                <img src="{{ asset('uploads/images/'.$data->image) }}" class="rounded mr-75" alt="profile image" height="64" width="64">
+                                                <img src="{{ asset('uploads/images/'.$data->image) }}" class="rounded mr-75" alt="profile image" height="64" width="64" id="blah">
                                             </a>
                                             <div class="media-body mt-75">
                                                 <div class="col-12 px-0 d-flex flex-sm-row flex-column justify-content-start">
                                                     <label class="btn btn-sm btn-primary ml-50 mb-50 mb-sm-0 cursor-pointer" for="account-upload">Upload new photo</label>
-                                                    <input type="file" name="image" id="account-upload" hidden>
+                                                    <input type="file" name="image" id="account-upload" onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])" hidden>
                                                     <small id="filename" class="ml-2"></small>
                                                 </div>
                                                 <p class="text-muted ml-75 mt-50"><small>Allowed JPG, JPEG or PNG.</small></p>
@@ -131,7 +116,6 @@
             </div>
         </div>
     </section>
-    <!-- account setting page end -->
 
 
 @endsection

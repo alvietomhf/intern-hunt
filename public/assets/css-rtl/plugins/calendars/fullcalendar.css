@@ -43,8 +43,8 @@ a.btn.disabled, .fc a.disabled.fc-button, fieldset:disabled a.btn, fieldset:disa
 
 .btn-primary {
   color : #FFFFFF;
-  background-color : #00ff0c;
-  border-color : #00ff0c;
+  background-color : #324ECF;
+  border-color : #324ECF;
 }
 .btn-primary:hover {
   color : #FFFFFF;
@@ -56,8 +56,8 @@ a.btn.disabled, .fc a.disabled.fc-button, fieldset:disabled a.btn, fieldset:disa
 }
 .btn-primary.disabled, .btn-primary:disabled {
   color : #FFFFFF;
-  background-color : #00ff0c;
-  border-color : #00ff0c;
+  background-color : #324ECF;
+  border-color : #324ECF;
 }
 .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
   color : #FFFFFF;
@@ -258,28 +258,28 @@ a.btn.disabled, .fc a.disabled.fc-button, fieldset:disabled a.btn, fieldset:disa
 }
 
 .btn-outline-primary, .fc .fc-button {
-  color : #00ff0c;
-  border-color : #00ff0c;
+  color : #324ECF;
+  border-color : #324ECF;
 }
 .btn-outline-primary:hover, .fc .fc-button:hover {
   color : #FFFFFF;
-  background-color : #00ff0c;
-  border-color : #00ff0c;
+  background-color : #324ECF;
+  border-color : #324ECF;
 }
 .btn-outline-primary:focus, .fc .fc-button:focus, .btn-outline-primary.focus, .fc .focus.fc-button {
-  box-shadow : 0 0 0 0.2rem rgba(64, 245, 49, 0.7);
+  box-shadow : 0 0 0 0.2rem rgba(50, 78, 207, 0.7);
 }
 .btn-outline-primary.disabled, .fc .disabled.fc-button, .btn-outline-primary:disabled, .fc .fc-button:disabled {
-  color : #00ff0c;
+  color : #324ECF;
   background-color : transparent;
 }
 .btn-outline-primary:not(:disabled):not(.disabled):active, .fc .fc-button:not(:disabled):not(.disabled):active, .btn-outline-primary:not(:disabled):not(.disabled).active, .fc .fc-button:not(:disabled):not(.disabled).active, .show > .btn-outline-primary.dropdown-toggle, .fc .show > .dropdown-toggle.fc-button {
   color : #FFFFFF;
-  background-color : #00ff0c;
-  border-color : #00ff0c;
+  background-color : #324ECF;
+  border-color : #324ECF;
 }
 .btn-outline-primary:not(:disabled):not(.disabled):active:focus, .fc .fc-button:not(:disabled):not(.disabled):active:focus, .btn-outline-primary:not(:disabled):not(.disabled).active:focus, .fc .fc-button:not(:disabled):not(.disabled).active:focus, .show > .btn-outline-primary.dropdown-toggle:focus, .fc .show > .dropdown-toggle.fc-button:focus {
-  box-shadow : 0 0 0 0.2rem rgba(64, 245, 49, 0.7);
+  box-shadow : 0 0 0 0.2rem rgba(50, 78, 207, 0.7);
 }
 
 .btn-outline-secondary {
@@ -459,7 +459,7 @@ a.btn.disabled, .fc a.disabled.fc-button, fieldset:disabled a.btn, fieldset:disa
 
 .btn-link {
   font-weight : 400;
-  color : #00ff0c;
+  color : #324ECF;
   text-decoration : none;
 }
 .btn-link:hover {
@@ -585,7 +585,7 @@ input[type='submit'].btn-block, input[type='reset'].btn-block, input[type='butto
 }
 
 .fc .fc-view-container .fc-body .fc-day-top.fc-today a {
-  background-color : #00ff0c;
+  background-color : #324ECF;
   color : #FFFFFF;
   padding : 5px 10px;
   margin-top : 2px;
@@ -619,7 +619,7 @@ input[type='submit'].btn-block, input[type='reset'].btn-block, input[type='butto
   height : auto;
   outline : none;
   text-shadow : none;
-  background-color : #00ff0c;
+  background-color : #324ECF;
   color : #FFFFFF;
 }
 .fc .fc-button:not(:disabled).fc-button-active {
@@ -631,7 +631,7 @@ input[type='submit'].btn-block, input[type='reset'].btn-block, input[type='butto
 }
 
 .fc .fc-event {
-  background : #00ff0c;
+  background : #324ECF;
   border : 1px solid #5E50EE;
   padding : 1px 8px;
   border-radius : 1rem;

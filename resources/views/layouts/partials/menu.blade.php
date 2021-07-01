@@ -2,7 +2,7 @@
     <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item mr-auto"><a class="navbar-brand" href="{{ route('home') }}">
-                    <div class="brand-logo"></div>
+                    {{-- <div class="brand-logo"></div> --}}
                     <h2 class="brand-text mb-0" style="font-size: 14px">INTERN HUNT</h2>
                 </a>
             </li>
@@ -15,11 +15,12 @@
             <div class="col-md-12">
                 <div class="d-flex justify-content-center mt-1 mb-0">
                     <div>
-                        <img width="150px" height="150px" class="d-flex justify-content-center" src="https://smkkotadijawatimur.files.wordpress.com/2017/04/logo-smkn-1-sby.jpg?w=241&h=299" alt="">
+                        {{-- <img width="150px" height="150px" class="d-flex justify-content-center" src="https://smkkotadijawatimur.files.wordpress.com/2017/04/logo-smkn-1-sby.jpg?w=241&h=299" alt=""> --}}
+                        <img width="150px" height="150px" class="d-flex justify-content-center" src="{{ asset('uploads/images/logo_jaabon.png') }}" alt="">
                     </div>
                 </div>
                 <div class="d-flex justify-content-center mt-1 mb-0">
-                    <strong>SMK NEGERI 1 SURABAYA</strong>
+                    <strong>SMK NEGERI 1 JABON</strong>
                 </div>
             </div>
         </div>

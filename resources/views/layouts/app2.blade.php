@@ -51,6 +51,15 @@
     {{-- <link rel="stylesheet" type="text/css" href="{{ asset('') }}assets/css/style.css"> --}}
     <!-- END: Custom CSS-->
     <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    <style type="text/css">
+    @font-face {
+        font-family: Poppins;
+        src: url('{{asset('/assets/fonts/Poppins-Regular.tff')}}')
+    }
+    body{
+        font-family: Poppins;
+    }
+    </style>
     @yield('css')
 
 </head>

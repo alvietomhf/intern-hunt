@@ -23,8 +23,8 @@
   margin : 0 0 10px 20px;
   clear : both;
   color : #FFFFFF;
-  background : -webkit-linear-gradient(208deg, #00ff0c, rgba(64, 245, 49, 0.7));
-  background :         linear-gradient(-118deg, #00ff0c, rgba(64, 245, 49, 0.7));
+  background : -webkit-linear-gradient(208deg, #324ECF, rgba(50, 78, 207, 0.7));
+  background :         linear-gradient(-118deg, #324ECF, rgba(50, 78, 207, 0.7));
   border-radius : 0.5rem;
   box-shadow : 0 4px 8px 0 rgba(0, 0, 0, 0.12), 0 2px 4px 0 rgba(0, 0, 0, 0.08);
 }

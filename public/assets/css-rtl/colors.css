@@ -1390,11 +1390,11 @@ input:focus ~ .bg-primary {
 }
 
 .primary {
-  color : #00ff0c !important;
+  color : #324ECF !important;
 }
 
 .bg-primary {
-  background-color : #00ff0c !important;
+  background-color : #324ECF !important;
 }
 .bg-primary .card-header, .bg-primary .card-footer {
   background-color : transparent;
@@ -1402,7 +1402,7 @@ input:focus ~ .bg-primary {
 
 .alert-primary {
   background : rgba(115, 103, 240, 0.2) !important;
-  color : #00ff0c !important;
+  color : #324ECF !important;
 }
 .alert-primary .alert-heading {
   box-shadow : rgba(115, 103, 240, 0.4) 0 6px 15px -7px;
@@ -1416,54 +1416,54 @@ input:focus ~ .bg-primary {
 }
 
 .border-primary {
-  border : 1px solid #00ff0c !important;
+  border : 1px solid #324ECF !important;
 }
 
 .border-top-primary {
-  border-top : 1px solid #00ff0c;
+  border-top : 1px solid #324ECF;
 }
 
 .border-bottom-primary {
-  border-bottom : 1px solid #00ff0c;
+  border-bottom : 1px solid #324ECF;
 }
 
 .border-left-primary {
-  border-right : 1px solid #00ff0c;
+  border-right : 1px solid #324ECF;
 }
 
 .border-right-primary {
-  border-left : 1px solid #00ff0c;
+  border-left : 1px solid #324ECF;
 }
 
 .bg-primary.badge-glow, .border-primary.badge-glow, .badge-primary.badge-glow {
-  box-shadow : 0 0 10px #00ff0c;
+  box-shadow : 0 0 10px #324ECF;
 }
 
 .badge.badge-primary {
-  background-color : #00ff0c;
+  background-color : #324ECF;
 }
 
 .badge.badge-light-primary {
   background-color : #DEDBFB;
-  color : #00ff0c !important;
+  color : #324ECF !important;
   font-weight : 500;
 }
 
 .overlay-primary {
-  background : #00ff0c;
+  background : #324ECF;
   /* The Fallback */
   background : rgba(64, 245, 49, 0.6);
 }
 
 .btn-primary {
   border-color : #4839EB !important;
-  background-color : #00ff0c !important;
+  background-color : #324ECF !important;
   color : #FFFFFF;
 }
 .btn-primary:hover {
   border-color : #5E50EE !important;
   color : #FFFFFF !important;
-  box-shadow : 0 8px 25px -8px #00ff0c;
+  box-shadow : 0 8px 25px -8px #324ECF;
 }
 .btn-primary:focus, .btn-primary:active {
   color : #FFFFFF !important;
@@ -1471,19 +1471,19 @@ input:focus ~ .bg-primary {
 
 .btn-flat-primary {
   background-color : transparent;
-  color : #00ff0c;
+  color : #324ECF;
 }
 .btn-flat-primary:hover {
-  color : #00ff0c;
+  color : #324ECF;
   background-color : rgba(115, 103, 240, 0.1);
 }
 .btn-flat-primary:active, .btn-flat-primary:focus {
-  background-color : #00ff0c;
+  background-color : #324ECF;
   color : #FFFFFF !important;
 }
 
 .btn-relief-primary {
-  background-color : #00ff0c;
+  background-color : #324ECF;
   box-shadow : inset 0 -3px 0 0 rgba(0, 0, 0, 0.2);
   color : #FFFFFF;
 }
@@ -1498,20 +1498,20 @@ input:focus ~ .bg-primary {
 }
 
 .btn-outline-primary {
-  border : 1px solid #00ff0c;
+  border : 1px solid #324ECF;
   background-color : transparent;
-  color : #00ff0c;
+  color : #324ECF;
 }
 .btn-outline-primary:hover {
   background-color : rgba(115, 103, 240, 0.08);
-  color : #00ff0c;
+  color : #324ECF;
 }
 .btn-outline-primary:active {
   color : #FFFFFF !important;
 }
 
 .btn-primary ~ .dropdown-menu .dropdown-item.active, .btn-outline-primary ~ .dropdown-menu .dropdown-item.active, .btn-flat-primary ~ .dropdown-menu .dropdown-item.active {
-  background-color : #00ff0c;
+  background-color : #324ECF;
   color : #FFFFFF;
 }
 .btn-primary ~ .dropdown-menu .dropdown-item.active:hover, .btn-outline-primary ~ .dropdown-menu .dropdown-item.active:hover, .btn-flat-primary ~ .dropdown-menu .dropdown-item.active:hover {
@@ -1519,11 +1519,11 @@ input:focus ~ .bg-primary {
 }
 
 .btn-primary ~ .dropdown-menu .dropdown-item:not(.active):not(:active):hover, .btn-outline-primary ~ .dropdown-menu .dropdown-item:not(.active):not(:active):hover, .btn-flat-primary ~ .dropdown-menu .dropdown-item:not(.active):not(:active):hover {
-  color : #00ff0c;
+  color : #324ECF;
 }
 
 .dropdown.dropdown-icon-wrapper .btn-primary ~ .dropdown-menu .dropdown-item:hover i, .dropdown.dropdown-icon-wrapper .btn-outline-primary ~ .dropdown-menu .dropdown-item:hover i, .dropdown.dropdown-icon-wrapper .btn-flat-primary ~ .dropdown-menu .dropdown-item:hover i, .dropup.dropdown-icon-wrapper .btn-primary ~ .dropdown-menu .dropdown-item:hover i, .dropup.dropdown-icon-wrapper .btn-outline-primary ~ .dropdown-menu .dropdown-item:hover i, .dropup.dropdown-icon-wrapper .btn-flat-primary ~ .dropdown-menu .dropdown-item:hover i, .dropright.dropdown-icon-wrapper .btn-primary ~ .dropdown-menu .dropdown-item:hover i, .dropright.dropdown-icon-wrapper .btn-outline-primary ~ .dropdown-menu .dropdown-item:hover i, .dropright.dropdown-icon-wrapper .btn-flat-primary ~ .dropdown-menu .dropdown-item:hover i, .dropleft.dropdown-icon-wrapper .btn-primary ~ .dropdown-menu .dropdown-item:hover i, .dropleft.dropdown-icon-wrapper .btn-outline-primary ~ .dropdown-menu .dropdown-item:hover i, .dropleft.dropdown-icon-wrapper .btn-flat-primary ~ .dropdown-menu .dropdown-item:hover i {
-  color : #00ff0c;
+  color : #324ECF;
 }
 
 .dropdown.dropdown-icon-wrapper .btn-primary ~ .dropdown-menu .dropdown-item:active i, .dropdown.dropdown-icon-wrapper .btn-outline-primary ~ .dropdown-menu .dropdown-item:active i, .dropdown.dropdown-icon-wrapper .btn-flat-primary ~ .dropdown-menu .dropdown-item:active i, .dropup.dropdown-icon-wrapper .btn-primary ~ .dropdown-menu .dropdown-item:active i, .dropup.dropdown-icon-wrapper .btn-outline-primary ~ .dropdown-menu .dropdown-item:active i, .dropup.dropdown-icon-wrapper .btn-flat-primary ~ .dropdown-menu .dropdown-item:active i, .dropright.dropdown-icon-wrapper .btn-primary ~ .dropdown-menu .dropdown-item:active i, .dropright.dropdown-icon-wrapper .btn-outline-primary ~ .dropdown-menu .dropdown-item:active i, .dropright.dropdown-icon-wrapper .btn-flat-primary ~ .dropdown-menu .dropdown-item:active i, .dropleft.dropdown-icon-wrapper .btn-primary ~ .dropdown-menu .dropdown-item:active i, .dropleft.dropdown-icon-wrapper .btn-outline-primary ~ .dropdown-menu .dropdown-item:active i, .dropleft.dropdown-icon-wrapper .btn-flat-primary ~ .dropdown-menu .dropdown-item:active i {
@@ -1531,11 +1531,11 @@ input:focus ~ .bg-primary {
 }
 
 .bullet.bullet-primary {
-  background-color : #00ff0c;
+  background-color : #324ECF;
 }
 
 .pagination-primary .page-item.active .page-link {
-  background : #00ff0c;
+  background : #324ECF;
   color : #FFFFFF;
 }
 .pagination-primary .page-item.active .page-link:hover {
@@ -1543,65 +1543,65 @@ input:focus ~ .bg-primary {
 }
 
 .pagination-primary .page-item .page-link:hover {
-  color : #00ff0c;
+  color : #324ECF;
 }
 
 .pagination-primary .page-item.prev-item .page-link:hover, .pagination-primary .page-item.next-item .page-link:hover {
-  background : #00ff0c;
+  background : #324ECF;
   color : #FFFFFF;
 }
 
 .nav-pill-primary .nav-item .nav-link.active {
   color : #FFFFFF;
-  background-color : #00ff0c !important;
+  background-color : #324ECF !important;
 }
 
 .progress-bar-primary {
   background-color : rgba(115, 103, 240, 0.1);
 }
 .progress-bar-primary .progress-bar {
-  background-color : #00ff0c;
+  background-color : #324ECF;
 }
 
 .chip-primary {
-  background-color : #00ff0c !important;
+  background-color : #324ECF !important;
 }
 .chip-primary .chip-body {
   color : #FFFFFF !important;
 }
 
 .divider.divider-primary .divider-text:before, .divider.divider-primary .divider-text:after {
-  border-color : #00ff0c !important;
+  border-color : #324ECF !important;
 }
 
 input[type='checkbox'].bg-primary + .custom-control-label:before, input[type='radio'].bg-primary + .custom-control-label:before {
-  background-color : #00ff0c !important;
+  background-color : #324ECF !important;
 }
 
 input:focus ~ .bg-primary {
-  box-shadow : 0 0 0 0.075rem #FFFFFF, 0 0 0 0.21rem #00ff0c !important;
+  box-shadow : 0 0 0 0.075rem #FFFFFF, 0 0 0 0.21rem #324ECF !important;
 }
 
 .vs-checkbox-primary input:checked ~ .vs-checkbox {
-  border-color : #00ff0c !important;
+  border-color : #324ECF !important;
 }
 .vs-checkbox-primary input:checked ~ .vs-checkbox .vs-checkbox--check {
-  background-color : #00ff0c !important;
+  background-color : #324ECF !important;
 }
 
 .vs-checkbox-primary input:active:checked + .vs-checkbox .vs-checkbox--check {
-  background-color : #00ff0c !important;
+  background-color : #324ECF !important;
 }
 
 .custom-switch-primary .custom-control-input:checked ~ .custom-control-label::before {
-  background-color : #00ff0c !important;
+  background-color : #324ECF !important;
   color : #FFFFFF;
   -webkit-transition : all 0.2s ease-out;
           transition : all 0.2s ease-out;
 }
 
 .vs-radio-primary input:checked ~ .vs-radio .vs-radio--circle {
-  background : #00ff0c !important;
+  background : #324ECF !important;
   box-shadow : 0 3px 12px 0 rgba(115, 103, 240, 0.4) !important;
 }
 

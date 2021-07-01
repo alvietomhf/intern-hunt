@@ -56,12 +56,12 @@
   content : none;
 }
 .app-content .wizard > .steps > ul > li.current > a {
-  color : #00ff0c;
+  color : #324ECF;
   cursor : default;
 }
 .app-content .wizard > .steps > ul > li.current .step {
-  border-color : #00ff0c;
-  background-color : #00ff0c;
+  border-color : #324ECF;
+  background-color : #324ECF;
   color : #FFFFFF;
 }
 .app-content .wizard > .steps > ul > li.disabled a {
@@ -90,12 +90,12 @@
 }
 .app-content .wizard > .steps > ul > li.done .step {
   background-color : #FFFFFF;
-  border-color : #00ff0c;
+  border-color : #324ECF;
   color : #B8C2CC;
 }
 .app-content .wizard > .steps > ul > li.done:last-child .step {
-  background-color : #00ff0c;
-  border-color : #00ff0c;
+  background-color : #324ECF;
+  border-color : #324ECF;
   color : #FFFFFF;
 }
 .app-content .wizard > .steps > ul > li.error > a {
@@ -163,7 +163,7 @@
   float : left;
 }
 .app-content .wizard > .actions > ul > li > a {
-  background : #00ff0c;
+  background : #324ECF;
   color : #FFFFFF;
   display : block;
   padding : 7px 12px;
@@ -180,7 +180,7 @@
   box-shadow : 0 0 0 100px rgba(0, 0, 0, 0.1) inset;
 }
 .app-content .wizard > .actions > ul > li > a[href='#previous'] {
-  background-color : #00ff0c;
+  background-color : #324ECF;
   color : #FFFFFF;
   border-radius : 0.42rem;
 }
@@ -215,7 +215,7 @@
   top : 43px;
   width : 50%;
   height : 3px;
-  background-color : #00ff0c;
+  background-color : #324ECF;
 }
 .app-content .wizard.wizard-circle > .steps > ul > li.current:after {
   background-color : transparent;
@@ -250,12 +250,12 @@
   }
   .app-content .wizard > .steps > ul > li:last-child:after {
     content : '';
-    background-color : #00ff0c;
+    background-color : #324ECF;
   }
 }
 
 @media (max-width: 480px) {
   .app-content .wizard > .steps > ul > li.current:after {
-    background-color : #00ff0c;
+    background-color : #324ECF;
   }
 }

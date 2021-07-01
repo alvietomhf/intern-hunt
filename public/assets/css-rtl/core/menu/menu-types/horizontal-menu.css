@@ -247,7 +247,7 @@
 }
 .horizontal-menu .header-navbar.navbar-horizontal ul#main-menu-navigation > li > .dropdown-menu .active > a {
   background : #F8F8F8;
-  color : #00ff0c;
+  color : #324ECF;
   font-weight : 500;
 }
 .horizontal-menu .header-navbar.navbar-horizontal ul#main-menu-navigation > li > .dropdown-menu .open.active > a {
@@ -271,8 +271,8 @@
   border-radius : 4px;
 }
 .horizontal-menu .header-navbar.navbar-horizontal ul#main-menu-navigation > li.active > a {
-  background : -webkit-linear-gradient(208deg, #00ff0c, rgba(64, 245, 49, 0.7));
-  background :         linear-gradient(-118deg, #00ff0c, rgba(64, 245, 49, 0.7));
+  background : -webkit-linear-gradient(208deg, #324ECF, rgba(50, 78, 207, 0.7));
+  background :         linear-gradient(-118deg, #324ECF, rgba(50, 78, 207, 0.7));
   box-shadow : 0 0 6px 1px rgba(64, 245, 49, 0.6);
   color : #FFFFFF;
   border-radius : 4px;
@@ -291,7 +291,7 @@
 }
 
 .horizontal-menu .navbar-dark .nav-item.active > a {
-  border-bottom : 2px solid #00ff0c;
+  border-bottom : 2px solid #324ECF;
   background-color : #313C50;
 }
 

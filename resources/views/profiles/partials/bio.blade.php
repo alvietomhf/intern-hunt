@@ -6,7 +6,7 @@
                   <img class="card-img img-fluid bg-cover rounded-0 w-100" style="height: 20rem" src="{{ auth()->user()->banner ? asset('uploads/images/'.auth()->user()->banner) : asset('assets/images/smkn1banner.jpg') }}" alt="User Profile Image">
                   <div class="card-img-overlay overflow-hidden">
                       <div class="row d-flex justify-content-end">
-                        <button data-href="{{ route('banner.edit') }}" data-container=".my-modal" class="btn btn-primary mr-2 btn-modal"><i class="fa fa-pencil-square-o"> Atur Banner</i></button>
+                        <button data-href="{{ route('banner.edit') }}" data-container=".my-modal" class="btn btn-primary mr-2 btn-modal"><i class="fa fa-pencil-square-o"></i> Atur Banner</button>
                       </div>
                 </div>
               </div>

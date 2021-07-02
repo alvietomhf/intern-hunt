@@ -6,7 +6,7 @@
     <div class="alert alert-warning" role="alert">
         Anda telah diundang oleh teman satu grup bimbingan prakerin anda! Klik tombol dibawah ini untuk konfirmasi!
         <div class="mt-1">
-            <a type="button" class="btn btn-sm btn-action btn-modal btn-primary text-dark" data-status="menerima" data-href="{{ route('vacancy.action_custom', [$applicant2->id, 'approved']) }}">Terima</a>
+            <a type="button" class="btn btn-sm btn-action btn-modal btn-primary text-white" data-status="menerima" data-href="{{ route('vacancy.action_custom', [$applicant2->id, 'approved']) }}">Terima</a>
             <a type="button" class="btn btn-sm btn-action btn-modal btn-danger text-white" data-status="menolak" data-href="{{ route('vacancy.action_custom', [$applicant2->id, 'rejected']) }}">Tolak</a>
         </div>
     </div>

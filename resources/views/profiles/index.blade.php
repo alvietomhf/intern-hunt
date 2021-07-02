@@ -78,7 +78,7 @@
   <section id="basic-carousel">
     @if(!(isset($biography->email) && isset($biography->address) && isset($biography->phone) && isset($biography->image)))
     <div class="alert alert-warning" role="alert">
-      Profil atau gambar anda belum lengkap! Tekan tombol untuk melengkapi <a type="button" class="btn btn-sm btn-modal btn-primary text-dark" data-href="{{ route('biography.edit', [$biography->id]) }}" data-container=".my-modal">Lengkapi</a>
+      Profil atau gambar anda belum lengkap! Tekan tombol untuk melengkapi <a type="button" class="btn btn-sm btn-modal btn-primary text-white" data-href="{{ route('biography.edit', [$biography->id]) }}" data-container=".my-modal">Lengkapi</a>
     </div>
     @endif
     @include('flash::message')

@@ -34,8 +34,14 @@
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="#">
+    {{-- <link rel="stylesheet" type="text/css" href="#"> --}}
     <!-- END: Custom CSS-->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <style>
+        body{
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
 
 </head>
 <!-- END: Head-->

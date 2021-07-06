@@ -35,10 +35,6 @@
           <fieldset class="form-group">
             <textarea class="form-control" id="basicTextarea" rows="3" placeholder="Deskripsi" name="description" required>{{ $data->description }}</textarea>
           </fieldset>
-          <fieldset class="form-group">
-            <label for="image">Image *.jpg/jpeg/png</label>
-            <input type="file" class="form-control-file" id="image" name="image[]" multiple="true">
-          </fieldset>
           @endrole
         </div>
         <div class="modal-footer">

@@ -12,7 +12,8 @@
     <title>@yield('title')</title>
     <link rel="apple-touch-icon" href="{{ asset('assets/images/ico/apple-icon-120.png') }}">
     {{-- <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/7/75/Unesa.png"/> --}}
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/ico/favicon.ico') }}">
+    <link rel="icon" type="image/png" href="{{ asset('logo.png') }}">
+    {{-- <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/ico/favicon.ico') }}"> --}}
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->

@@ -59,10 +59,10 @@
                 <a class="my-25" href="javascript: void(0);">
                     <img src="{{ asset('uploads/images/'.$industry->biography->user->image) }}" alt="users avatar" class="users-avatar-shadow rounded" height="90" width="90">
                 </a>
-                <p class="mt-1">{{ $industry->biography->description ?? '' }}</p>
+                <p class="mt-1">{{ $industry->biography->description ?? '-' }}</p>
                 <div class="mt-1">
                     <h6 class="mb-0">Nama:</h6>
-                    <p>{{ $industry->biography->name ?? '' }}</p>
+                    <p>{{ $industry->biography->name ? $industry->biography->name : $industry->biography->user->name }}</p>
                 </div>
                 <div class="mt-1">
                     <h6 class="mb-0">Alamat:</h6>

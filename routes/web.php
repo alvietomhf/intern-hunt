@@ -29,6 +29,9 @@ Route::group(['middleware' => 'auth'], function () {
     });
     Route::get('profile', 'ProfileController@index')->name('profile');
     Route::resource('biography', 'BiographyController');
+    Route::get('biography/image/create', 'BiographyController@imageCreate')->name('bio.imageCreate');
+    Route::post('biography/image', 'BiographyController@imageUpload')->name('bio.imageUpload');
+    Route::delete('biography/{id}/image', 'BiographyController@imageDelete')->name('bio.imageDelete');
     Route::resource('experience', 'ExperienceController');
     Route::resource('portfolio', 'PortfolioController');
     Route::resource('student', 'StudentController');
@@ -64,7 +67,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('prakerin/industry', 'PrakerinController@index_industry')->name('prakerin.index_i');
     Route::get('prakerin/industry/{id}/detail/{vacancy}', 'PrakerinController@detail_student')->name('prakerin.detail_s');
     Route::get('prakerin/{id}/history/{vacancy}', 'HistoryController@prakerin_history')->name('prakerin.history');
-    // Route::get('prakerin/{id}/student', 'PrakerinController@show_student')->name('prakerin.show_s');
+    Route::get('prakerin/{id}/student', 'PrakerinController@show_student')->name('prakerin.show_s');
     // Route::get('prakerin/{id}/teacher', 'PrakerinController@show_teacher')->name('prakerin.show_t');
     // Route::get('prakerin/student/{id}/journal/{vacancy}', 'PrakerinController@show_journal')->name('prakerin.show_sjournal');
     // Route::get('prakerin/student/{id}/file/{vacancy}', 'PrakerinController@show_file')->name('prakerin.show_sfile');

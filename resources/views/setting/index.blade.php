@@ -18,6 +18,14 @@
                             Keamanan
                         </a>
                     </li>
+                    @role('industri')
+                    <li class="nav-item">
+                        <a class="nav-link d-flex py-75" id="account-pill-biography" data-toggle="pill" href="#account-vertical-biography" aria-expanded="false">
+                            <i class="feather icon-user mr-50 font-medium-3"></i>
+                            Biografi
+                        </a>
+                    </li>
+                    @endrole
                 </ul>
             </div>
 
@@ -109,6 +117,59 @@
                                         </div>
                                     </form>
                                 </div>
+                                @role('industri')
+                                <div class="tab-pane fade " id="account-vertical-biography" role="tabpanel" aria-labelledby="account-pill-biography" aria-expanded="false">
+                                    <form action="{{ route('biography.update', [$data->biography->id]) }}" method="post">
+                                    @csrf
+                                    @method('PUT')
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <div class="controls">
+                                                        <label for="name">Nama Industri</label>
+                                                        <input type="text" name="name" id="name" value="{{ $data->biography->name ?? '' }}" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <div class="controls">
+                                                        <label for="address">Alamat</label>
+                                                        <input type="text" name="address" id="address" value="{{ $data->biography->address ?? '' }}" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <div class="controls">
+                                                        <label for="email">Email</label>
+                                                        <input type="text" name="email" id="email" value="{{ $data->biography->email ?? '' }}" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <div class="controls">
+                                                        <label for="phone">Nomor HP</label>
+                                                        <input type="text" name="phone" id="phone" value="{{ $data->biography->phone ?? '' }}" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <div class="controls">
+                                                        <label for="account-retype-new-password">Deskripsi</label>
+                                                        <textarea class="form-control" id="basicTextarea" rows="3" name="description">{{ $data->biography->description }}</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
+                                                <button type="submit" class="btn btn-primary mr-sm-1 mb-1 mb-sm-0">Simpan</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                @endrole
                             </div>
                         </div>
                     </div>

@@ -134,7 +134,7 @@ class VacancyApplicantController extends Controller
                     'tag_id' => $item->tag_id,
                     'title' => $item->title,
                     'image' => $item->biography->user->image,
-                    'name' => $item->biography->name ? $item->biography->name : $item->biograpghy->user->name,
+                    'name' => $item->biography->name ? $item->biography->name : $item->biography->user->name,
                     'ranking' => $ranking,
                     'begin_at' => $item->begin_at,
                     'end_at' => $item->end_at,

@@ -78,48 +78,45 @@
   <section id="basic-carousel">
     @if(!(isset($biography->email) && isset($biography->address) && isset($biography->phone) && isset($biography->image)))
     <div class="alert alert-warning" role="alert">
-      Profil atau gambar anda belum lengkap! Tekan tombol untuk melengkapi <a type="button" class="btn btn-sm btn-modal btn-primary text-white" data-href="{{ route('biography.edit', [$biography->id]) }}" data-container=".my-modal">Lengkapi</a>
+      Profil atau foto anda belum lengkap! Tekan tombol untuk melengkapi <a type="button" class="btn btn-sm btn-modal btn-primary text-white" data-href="{{ route('biography.edit', [$biography->id]) }}" data-container=".my-modal">Lengkapi</a>
     </div>
     @endif
     @include('flash::message')
     @include('profiles.partials.bio')
-    <div class="row justify-content-center">
-      @if (isset($biography->image))
-      <div class="col-6">
-          <div class="card">
-              <div class="card-content">
-                  <div class="card-body">
-                      <div id="bio-image" class="carousel slide" data-ride="carousel">
-                          <ol class="carousel-indicators">
-                            @if (isset($biography->image))
-                                @foreach (json_decode($biography->image) as $key => $img)
-                                <li data-target="#bio-image" data-slide-to="{{ $key }}"></li>
-                                @endforeach
-                            @endif
-                          </ol>
-                          <div class="carousel-inner" role="listbox">
-                            @if (isset($biography->image))
-                                @foreach (json_decode($biography->image) as $key => $img)
-                                <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                                  <img class="img-fluid" src="{{ asset('uploads/images/'.$img) }}">
-                                </div>
-                                @endforeach
-                            @endif
-                          </div>
-                          <a class="carousel-control-prev" href="#bio-image" role="button" data-slide="prev">
-                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                              <span class="sr-only">Previous</span>
-                          </a>
-                          <a class="carousel-control-next" href="#bio-image" role="button" data-slide="next">
-                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                              <span class="sr-only">Next</span>
-                          </a>
-                      </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">  
+              <div class="card-header">
+                  <div class="float-left">
+                    <h1>Galeri</h1>
+                  </div>
+                  <div class="float-right">
+                    <a class="btn btn-primary btn-modal" href="javascript:void(0);" data-href="{{ route('bio.imageCreate') }}" data-container=".my-modal">Tambah Foto</a>
                   </div>
               </div>
-          </div>
-      </div>
-      @endif
+              <hr class="bg-primary">
+              <div class="card-body">
+                @if (isset($biography->image))
+                <div class="row">
+                  @foreach (json_decode($biography->image) as $key => $img)
+                  <div class="col-lg-3 col-md-6 col-sm-12">
+                      <div class="card">
+                          <div class="card-content">
+                              <img class="card-img img-fluid" src="{{ asset('uploads/images/'.$img->name) }}" alt="Card image">
+                              <div class="card-img-overlay overflow-hidden">
+                                <div class="row d-flex justify-content-end">
+                                  <button data-href="{{ route('bio.imageDelete', [$img->id]) }}" class="btn btn-sm btn-danger mr-2 btn-delete"><i class="fa fa-trash-o"></i></button>
+                                </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  @endforeach
+                </div>
+                @endif
+              </div>  
+            </div>
+        </div>
     </div>
   </section>
   @endrole

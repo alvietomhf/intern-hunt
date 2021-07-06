@@ -39,17 +39,6 @@ class BiographyController extends Controller
         $input = $request->all();
         $input['user_id'] = auth()->user()->id;
 
-        if(auth()->user()->hasRole('industri')){
-            if ($request->hasFile('image')) {
-                foreach ($request->file('image') as $key => $img) {
-                    $name = rand().'.'.$img->getClientOriginalExtension();
-                    $img->move(public_path('uploads/images'), $name);
-                    $data[] = $name;
-                }
-            }
-            $input['image'] = json_encode($data);
-        }
-
         Biography::create($input);
 
         flash('Berhasil menambahkan biografi')->success();
@@ -93,25 +82,6 @@ class BiographyController extends Controller
         $biography = Biography::find($id);
         $input = $request->all();
 
-        if(auth()->user()->hasRole('industri')){
-            $oldimage = $biography->image;
-            if($request->hasFile('image')) {
-                if($oldimage != null) {
-                    foreach (json_decode($oldimage) as $key => $img) {
-                        File::delete('uploads/images/'.$img);
-                    }
-                }
-                foreach ($request->file('image') as $key => $img) {
-                    $name = rand().'.'.$img->getClientOriginalExtension();
-                    $img->move(public_path('uploads/images'), $name);
-                    $data[] = $name;
-                }
-                $input['image'] = json_encode($data);
-            } else {
-                unset($input['image']);
-            }
-        }
-
         $biography->update($input);
 
         flash('Berhasil mengedit biografi')->success();
@@ -128,5 +98,79 @@ class BiographyController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function imageCreate()
+    {
+        return view('biography.image');
+    }
+
+    public function imageUpload(Request $request)
+    {
+        $biography = Biography::find(auth()->user()->biography->id);
+        $input = $request->all();
+        $oldimage = $biography->image;
+        $data = [];
+
+        if ($request->hasFile('image')) {
+            if($oldimage != null) {
+                $imgDecode = json_decode($oldimage);
+                foreach ($request->file('image') as $key => $img) {
+                    $name = rand().'.'.$img->getClientOriginalExtension();
+                    $img->move(public_path('uploads/images'), $name);
+                    array_push($imgDecode, ['id' => rand(), 'name' => $name]);
+                }
+                $data = $imgDecode;
+            } else {
+                foreach ($request->file('image') as $key => $img) {
+                    $name = rand().'.'.$img->getClientOriginalExtension();
+                    $img->move(public_path('uploads/images'), $name);
+                    array_push($data, ['id' => rand(), 'name' => $name]);
+                }
+            }
+        }
+        $input['image'] = json_encode($data);
+
+        $biography->update($input);
+
+        flash('Berhasil menambahkan foto')->success();
+
+        return redirect()->route('profile');
+    }
+
+    public function imageDelete($id)
+    {
+        try {
+            $biography = Biography::find(auth()->user()->biography->id);
+
+            $image = json_decode($biography->image);
+            foreach ($image as $key => $img) {
+                if($img->id == $id){
+                    File::delete('uploads/images/'.$img->name);
+                }
+            }
+
+            $image = array_filter($image, function ($item) use ($id) {
+                return $item->id != $id;
+            });
+            $data = array_values($image);
+
+            $biography->update([
+                'image' => json_encode($data)
+            ]);
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Berhasil menghapus foto',
+                'url' => route('profile'),
+            ]);
+        } catch(\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Gagal menghapus foto'
+            ]);
+        }
+
+        
     }
 }

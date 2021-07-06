@@ -23,10 +23,10 @@ class VacancyController extends Controller
             $detail = 'all';
         } else {
             if(request()->detail == 'lowongan'){
-                if(!auth()->user()->biography->description && !auth()->user()->biography->image && !auth()->user()->biography->name){
-                    flash('Harap lengkapi biografi terlebih dahulu')->error();
-                    return redirect()->route('profile');
-                }
+                // if(!auth()->user()->biography->description && !auth()->user()->biography->image && !auth()->user()->biography->name){
+                //     flash('Harap lengkapi biografi terlebih dahulu')->error();
+                //     return redirect()->route('profile');
+                // }
                 $data = Vacancy::where('biography_id', auth()->user()->biography->id)->get();
                 $type = 'active';
                 $detail = 'lowongan';

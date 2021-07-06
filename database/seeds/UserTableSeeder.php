@@ -22,9 +22,9 @@ class UserTableSeeder extends Seeder
         $siswa = User::create([
             'name' => 'Siswa1',
             'username' => 'siswa1',
-            'address' => 'Surabaya',
+            'address' => 'Driyorejo',
             'phone' => '082234897333',
-            'schname' => 'SMKN 1 Surabaya',
+            'schname' => 'SMKN 1 Driyorejo',
             'department' => 'RPL',
             'image' => 'profile1.png',
             'password' => Hash::make('password'),
@@ -35,9 +35,9 @@ class UserTableSeeder extends Seeder
         $guru = User::create([
             'name' => 'Guru1',
             'username' => 'guru1',
-            'address' => 'Surabaya',
+            'address' => 'Driyorejo',
             'phone' => '082234897332',
-            'schname' => 'SMKN 1 Surabaya',
+            'schname' => 'SMKN 1 Driyorejo',
             'image' => 'profile2.png',
             'password' => Hash::make('password'),
         ]);

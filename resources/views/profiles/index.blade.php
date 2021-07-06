@@ -27,8 +27,8 @@
                         <div class="d-flex justify-content-between">
                             <h4 class="ml-2">{{ $value->title ?? '' }}</h4>
                             <div>
-                              <button data-href="{{ route('experience.edit', [$value->id]) }}" data-container=".my-modal" class="btn btn-modal"><i class="fa fa-pencil fa-2x"></i></button>
-                              <button data-href="{{ route('experience.destroy', [$value->id]) }}" class="btn btn-delete"><i class="fa fa-trash-o fa-2x"></i></button>
+                              <button data-href="{{ route('experience.edit', [$value->id]) }}" data-container=".my-modal" class="btn btn-modal"><i class="fa fa-pencil"></i></button>
+                              <button data-href="{{ route('experience.destroy', [$value->id]) }}" class="btn btn-delete"><i class="fa fa-trash-o"></i></button>
                             </div>
                         </div>
                         <p class="ml-2">{{ $value->description ?? '' }}</p>
@@ -56,12 +56,12 @@
                 @foreach ($portfolio as $key => $value)
                         <div class="d-flex justify-content-between">
                             <div>
-                                <h4 class="d-inline ml-2">{{ $value->title ?? '' }}</h4>
-                                <span class="d-inline ml-1 badge badge-pill badge-light">{{ App\Tag::find($value->tag_id)->name ?? '' }}</span>
+                                <h4 class="ml-2">{{ $value->title ?? '' }}</h4>
+                                <span class="ml-2 badge badge-pill badge-light">{{ App\Tag::find($value->tag_id)->name ?? '' }}</span>
                             </div>
-                            <div>
-                              <button data-href="{{ route('portfolio.edit', [$value->id]) }}" data-container=".my-modal" class="btn btn-modal"><i class="fa fa-pencil fa-2x"></i></button>
-                              <button data-href="{{ route('portfolio.destroy', [$value->id]) }}" class="btn btn-delete"><i class="fa fa-trash-o fa-2x"></i></button>
+                            <div class="mt-3 d-flex">
+                              <button data-href="{{ route('portfolio.edit', [$value->id]) }}" data-container=".my-modal" class="d-inline btn btn-modal"><i class="fa fa-pencil"></i></button>
+                              <button data-href="{{ route('portfolio.destroy', [$value->id]) }}" class="d-inline btn btn-delete"><i class="fa fa-trash-o"></i></button>
                             </div>
                         </div>
                         <p class="ml-2">{{ $value->description ?? '' }}</p>

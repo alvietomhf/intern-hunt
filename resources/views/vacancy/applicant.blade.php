@@ -28,7 +28,7 @@
             <div class="card-content">
                 <div class="item-img">
                     <div class="card overlay-img-card text-dark">
-                        <img src="{{ asset('uploads/images/'.$value->image) }}" class="card-img" alt="card-img-6">
+                        <img src="{{ asset('uploads/images/'.$value->image) }}" class="card-img" alt="card-img-6" width="300px" height="200px">
                         <div class="card-img-overlay">
                             <div class="badge badge-pill badge-glow badge-primary">Rekomendasi</div>
                         </div>
@@ -59,7 +59,7 @@
             <div class="card-content">
                 <div class="item-img">
                     <div class="card overlay-img-card text-dark">
-                        <img src="{{ asset('uploads/images/'.$value->image) }}" class="card-img" alt="card-img-6">
+                        <img src="{{ asset('uploads/images/'.$value->image) }}" class="card-img" alt="card-img-6" width="300px" height="200px">
                     </div>
                 </div>
                 <div class="card-body">

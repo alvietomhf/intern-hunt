@@ -86,7 +86,7 @@ class HomeController extends Controller
         }
 
         if($user->hasRole('industri')){
-            $user->update(['name' => $request->name]);
+            $user->update(['name' => $request->name, 'image' => $input['image']]);
             $user->biography->update([
                 'address' => $request->address,
                 'phone' => $request->phone,

@@ -26,7 +26,7 @@
         <div class="card-content">
             <div class="item-img">
                 <div class="card overlay-img-card text-dark">
-                    <img src="{{ asset('uploads/images/'.$value->biography->user->image) }}" class="card-img" alt="card-img-6">
+                    <img src="{{ asset('uploads/images/'.$value->biography->user->image) }}" class="card-img" alt="card-img-6" width="300px" height="200px">
                 </div>
             </div>
             <div class="card-body">
@@ -141,8 +141,8 @@
     </div>
   @endif
 </section>
-<div class="modal fade my-modal" id="xlarge" tabindex="-1" role="dialog" aria-labelledby="myModalLabel16" aria-hidden="true"></div>
-<div class="modal fade child-modal" id="xlarge" tabindex="-1" role="dialog" aria-labelledby="myModalLabel16" aria-hidden="true"></div>
+<div class="modal my-modal" id="xlarge" tabindex="-1" role="dialog" aria-labelledby="myModalLabel16" aria-hidden="true"></div>
+<div class="modal child-modal" id="xlarge" tabindex="-1" role="dialog" aria-labelledby="myModalLabel16" aria-hidden="true"></div>
 @endsection
 
 @section('js')

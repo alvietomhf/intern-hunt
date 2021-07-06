@@ -43,7 +43,7 @@
     </div>
   </div>
 </section>
-<div class="modal fade my-modal" id="xlarge" tabindex="-1" role="dialog" aria-labelledby="myModalLabel16" aria-hidden="true"></div>
+<div class="modal my-modal" id="xlarge" tabindex="-1" role="dialog" aria-labelledby="myModalLabel16" aria-hidden="true"></div>
 @endsection
 
 @section('js')

@@ -7,7 +7,7 @@ return [
         'short_name' => 'HI',
         'start_url' => '/',
         'background_color' => '#ffffff',
-        'theme_color' => '#000000',
+        'theme_color' => '#324ECF',
         'display' => 'standalone',
         'orientation'=> 'any',
         'status_bar'=> 'black',

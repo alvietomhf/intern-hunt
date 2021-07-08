@@ -4,7 +4,7 @@ return [
     'name' => 'LaravelPWA',
     'manifest' => [
         'name' => 'Hunting Intern',
-        'short_name' => 'HI',
+        'short_name' => 'Hunting Intern',
         'start_url' => '/',
         'background_color' => '#ffffff',
         'theme_color' => '#324ECF',

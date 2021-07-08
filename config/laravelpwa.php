@@ -10,7 +10,7 @@ return [
         'theme_color' => '#324ECF',
         'display' => 'standalone',
         'orientation'=> 'any',
-        'status_bar'=> 'black',
+        'status_bar'=> '#324ECF',
         'icons' => [
             '72x72' => [
                 'path' => '/assets/pwa/logo/72x72.png',

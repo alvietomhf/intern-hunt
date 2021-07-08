@@ -24,7 +24,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/css/tables/datatable/datatables.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/css/animate/animate.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/css/extensions/sweetalert2.min.css') }}">
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/css/pickers/pickadate/pickadate.css') }}"> --}}    
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/css/pickers/pickadate/pickadate.css') }}"> --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/css/forms/select/select2.min.css') }}">
     <!-- END: Vendor CSS-->
 
@@ -51,7 +51,7 @@
     {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}"> --}}
     <!-- END: Custom CSS-->
     <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <style>
         body{
@@ -66,6 +66,7 @@
     </style>
     @yield('css')
 
+    @laravelPWA
 </head>
 <!-- END: Head-->
 

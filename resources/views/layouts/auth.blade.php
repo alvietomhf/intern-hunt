@@ -44,6 +44,7 @@
         }
     </style>
 
+    @laravelPWA
 </head>
 <!-- END: Head-->
 
@@ -53,7 +54,7 @@
     <!-- BEGIN: Content-->
     @yield('content')
     <!-- END: Content-->
-    
+
     <!-- BEGIN: Vendor JS-->
     <script src="{{ asset('assets/vendors/js/vendors.min.js') }}"></script>
     <!-- BEGIN Vendor JS-->

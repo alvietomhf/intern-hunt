@@ -3,8 +3,8 @@
 return [
     'name' => 'LaravelPWA',
     'manifest' => [
-        'name' => 'Hunting Intern',
-        'short_name' => 'Hunting Intern',
+        'name' => 'Intern Hunt',
+        'short_name' => 'Intern Hunt',
         'start_url' => '/',
         'background_color' => '#ffffff',
         'theme_color' => '#324ECF',

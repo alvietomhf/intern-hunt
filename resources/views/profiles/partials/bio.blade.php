@@ -49,8 +49,13 @@
                       <h6 class="mb-0">No HP:</h6>
                       <p>{{ $biography->phone ?? '-' }}</p>
                       @endif
+                      @if(auth()->user()->hasRole('guru') || auth()->user()->hasRole('industri'))
                       <h6 class="mb-0">Bergabung:</h6>
                       <p>{{ auth()->user()->created_at->format('d, F Y') }}</p>
+                      @elseif(auth()->user()->hasRole('siswa'))
+                      <h6 class="mb-0">Jurusan:</h6>
+                      <p>{{ auth()->user()->department ?? '' }}</p>
+                      @endif
                   </div>
           </div>
       </div>
